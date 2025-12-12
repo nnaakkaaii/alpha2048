@@ -238,114 +238,78 @@ func (e *MaxTileEvaluator) Evaluate(b Board) float64 {
 	return math.Log2(float64(maxVal))
 }
 
-// LargestTilePotentialEvaluator は最大タイルを作る可能性で評価する
-// 単一の最大タイルの価値を最大化することに特化
+// LargestTilePotentialEvaluator は重み付けカーネルを用いた評価関数
 type LargestTilePotentialEvaluator struct{}
 
-func (e *LargestTilePotentialEvaluator) Evaluate(b Board) float64 {
-	score := 0.0
-
-	// 最大タイルとその位置を特定
-	maxVal := 0
-	maxRow, maxCol := 0, 0
-	for r := 0; r < 4; r++ {
-		for c := 0; c < 4; c++ {
-			v := b.Get(r, c)
-			if v > maxVal {
-				maxVal = v
-				maxRow, maxCol = r, c
-			}
-		}
-	}
-
-	// 最大タイルの価値（指数的に重要）
-	if maxVal > 0 {
-		score += float64(maxVal) * 10.0
-	}
-
-	// 最大タイルが角にあるとボーナス（大きいタイルほどボーナスも大きい）
-	isCorner := (maxRow == 0 || maxRow == 3) && (maxCol == 0 || maxCol == 3)
-	if isCorner && maxVal > 0 {
-		score += float64(maxVal) * 5.0
-	}
-
-	// 空きマス数（機動力確保）
-	emptyCells := b.EmptyCells()
-	score += float64(len(emptyCells)) * float64(maxVal) * 0.1
-
-	// 最大タイルの周囲に次に大きいタイルがあるとボーナス（マージの可能性）
-	secondMax := 0
-	for r := 0; r < 4; r++ {
-		for c := 0; c < 4; c++ {
-			v := b.Get(r, c)
-			if v > secondMax && v < maxVal {
-				secondMax = v
-			}
-		}
-	}
-
-	// 最大タイルと同じ値が隣接していればマージ可能で大ボーナス
-	neighbors := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
-	for _, d := range neighbors {
-		nr, nc := maxRow+d[0], maxCol+d[1]
-		if nr >= 0 && nr < 4 && nc >= 0 && nc < 4 {
-			v := b.Get(nr, nc)
-			if v == maxVal {
-				// 最大タイル同士が隣接 = 次のレベルへ進める
-				score += float64(maxVal) * 20.0
-			} else if v == secondMax && secondMax > 0 {
-				// 2番目に大きいタイルが隣接
-				score += float64(secondMax) * 2.0
-			}
-		}
-	}
-
-	// 単調性ボーナス（角から降順に並んでいると良い）
-	score += e.cornerMonotonicity(b, maxRow, maxCol) * float64(maxVal) * 0.5
-
-	return score
+// 4つの角を基準にした重み行列（指数的スケール）
+var weightKernels = [4][4][4]float64{
+	// 左上基準（指数的: 2^15, 2^14, ...）
+	{{32768, 16384, 8192, 4096}, {256, 512, 1024, 2048}, {128, 64, 32, 16}, {1, 2, 4, 8}},
+	// 右上基準
+	{{4096, 8192, 16384, 32768}, {2048, 1024, 512, 256}, {16, 32, 64, 128}, {8, 4, 2, 1}},
+	// 左下基準
+	{{1, 2, 4, 8}, {128, 64, 32, 16}, {256, 512, 1024, 2048}, {32768, 16384, 8192, 4096}},
+	// 右下基準
+	{{8, 4, 2, 1}, {16, 32, 64, 128}, {2048, 1024, 512, 256}, {4096, 8192, 16384, 32768}},
 }
 
-// cornerMonotonicity は最大タイルの角を基準にした単調性を計算
-func (e *LargestTilePotentialEvaluator) cornerMonotonicity(b Board, maxRow, maxCol int) float64 {
-	// 最大タイルがある角を特定（なければ最も近い角）
-	cornerRow := 0
-	if maxRow > 1 {
-		cornerRow = 3
-	}
-	cornerCol := 0
-	if maxCol > 1 {
-		cornerCol = 3
+func (e *LargestTilePotentialEvaluator) Evaluate(b Board) float64 {
+	// 最大タイルを特定
+	maxVal := 0
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			if v := b.Get(r, c); v > maxVal {
+				maxVal = v
+			}
+		}
 	}
 
-	mono := 0.0
-	// 行方向
+	// 1. 最大タイルの価値（主要項）
+	score := float64(maxVal) * 10.0
+
+	// 2. 重み付けカーネルによる位置評価（4パターンの最大値）
+	bestWeightedScore := math.Inf(-1)
+	for _, kernel := range weightKernels {
+		weightedScore := 0.0
+		for r := 0; r < 4; r++ {
+			for c := 0; c < 4; c++ {
+				v := b.Get(r, c)
+				if v > 0 {
+					// タイル値と位置重みの積
+					weightedScore += float64(v) * kernel[r][c]
+				}
+			}
+		}
+		if weightedScore > bestWeightedScore {
+			bestWeightedScore = weightedScore
+		}
+	}
+	// 正規化して加算
+	score += bestWeightedScore / 1000.0
+
+	// 3. 空きマス評価（log2(maxTile)に依存）
+	emptyCells := len(b.EmptyCells())
+	if maxVal > 0 {
+		score += float64(emptyCells) * math.Log2(float64(maxVal)) * 5.0
+	}
+
+	// 4. マージ可能ボーナス
 	for r := 0; r < 4; r++ {
-		for c := 0; c < 3; c++ {
-			c1, c2 := c, c+1
-			if cornerCol == 3 {
-				c1, c2 = 3-c, 3-c-1
+		for c := 0; c < 4; c++ {
+			v := b.Get(r, c)
+			if v == 0 {
+				continue
 			}
-			v1, v2 := b.Get(r, c1), b.Get(r, c2)
-			if v1 >= v2 {
-				mono += 1
+			if c < 3 && b.Get(r, c+1) == v {
+				score += float64(v) * 0.5
 			}
-		}
-	}
-	// 列方向
-	for c := 0; c < 4; c++ {
-		for r := 0; r < 3; r++ {
-			r1, r2 := r, r+1
-			if cornerRow == 3 {
-				r1, r2 = 3-r, 3-r-1
-			}
-			v1, v2 := b.Get(r1, c), b.Get(r2, c)
-			if v1 >= v2 {
-				mono += 1
+			if r < 3 && b.Get(r+1, c) == v {
+				score += float64(v) * 0.5
 			}
 		}
 	}
-	return mono / 24.0 // 正規化（最大24）
+
+	return score
 }
 
 // MergeableEvaluator は隣接する同じ値のペア数で評価する
