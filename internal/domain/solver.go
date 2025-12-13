@@ -57,7 +57,7 @@ func (s *Solver) expectedScore(board Board, depth int) float64 {
 
 	// 空きマスが多い場合はサンプリング（高速化）
 	sampleCells := emptyCells
-	maxSample := 6
+	maxSample := 4  // 6から4に削減して高速化
 	if len(emptyCells) > maxSample {
 		// 戦略的にサンプリング: 均等に分散して選択
 		sampleCells = make([][2]int, 0, maxSample)
