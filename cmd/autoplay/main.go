@@ -13,6 +13,7 @@ func main() {
 	depth := flag.Int("depth", 3, "search depth")
 	delay := flag.Int("delay", 100, "delay between moves (ms)")
 	useAStar := flag.Bool("astar", false, "use A* algorithm")
+	useParallel := flag.Bool("parallel", false, "use parallel search")
 	quiet := flag.Bool("quiet", false, "suppress output")
 	flag.Parse()
 
@@ -22,6 +23,7 @@ func main() {
 	config.MaxDepth = *depth
 	config.Delay = time.Duration(*delay) * time.Millisecond
 	config.UseAStar = *useAStar
+	config.UseParallel = *useParallel
 	config.Verbose = !*quiet
 
 	usecase.AutoPlay(os.Stdout, rng, config)

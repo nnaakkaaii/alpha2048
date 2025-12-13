@@ -11,21 +11,23 @@ import (
 
 // AutoPlayConfig は自動プレイの設定
 type AutoPlayConfig struct {
-	MaxDepth   int
-	Delay      time.Duration
-	Weights    []float64
-	UseAStar   bool
-	Verbose    bool
+	MaxDepth    int
+	Delay       time.Duration
+	Weights     []float64
+	UseAStar    bool
+	UseParallel bool
+	Verbose     bool
 }
 
 // DefaultAutoPlayConfig はデフォルトの設定を返す
 func DefaultAutoPlayConfig() AutoPlayConfig {
 	return AutoPlayConfig{
-		MaxDepth: 4,
-		Delay:    100 * time.Millisecond,
-		Weights:  nil, // LargestTilePotentialEvaluatorを単独使用するため不要
-		UseAStar: false,
-		Verbose:  true,
+		MaxDepth:    4,
+		Delay:       100 * time.Millisecond,
+		Weights:     nil, // LargestTilePotentialEvaluatorを単独使用するため不要
+		UseAStar:    false,
+		UseParallel: false,
+		Verbose:     true,
 	}
 }
 
@@ -42,6 +44,8 @@ func AutoPlay(w io.Writer, rng *rand.Rand, config AutoPlayConfig) (int, int) {
 
 	if config.UseAStar {
 		solver = domain.NewAStarSolver(evaluator, config.MaxDepth)
+	} else if config.UseParallel {
+		solver = domain.NewParallelSolver(evaluator, config.MaxDepth)
 	} else {
 		solver = domain.NewSolver(evaluator, config.MaxDepth)
 	}
@@ -50,7 +54,13 @@ func AutoPlay(w io.Writer, rng *rand.Rand, config AutoPlayConfig) (int, int) {
 
 	if config.Verbose {
 		fmt.Fprintln(w, "=== 2048 AutoPlay ===")
-		fmt.Fprintf(w, "Depth: %d, UseAStar: %v\n\n", config.MaxDepth, config.UseAStar)
+		mode := "Sequential"
+		if config.UseAStar {
+			mode = "A*"
+		} else if config.UseParallel {
+			mode = "Parallel"
+		}
+		fmt.Fprintf(w, "Depth: %d, Mode: %s\n\n", config.MaxDepth, mode)
 	}
 
 	for !game.IsGameOver() {
