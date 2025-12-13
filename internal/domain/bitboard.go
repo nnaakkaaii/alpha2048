@@ -125,6 +125,7 @@ func slideRow(row uint16) (uint16, int) {
 	score := 0
 	result := [4]int{}
 	writePos := 0
+	merged := [4]bool{} // マージ済みフラグ
 	
 	// 左にスライドしてマージ
 	for readPos := 0; readPos < 4; readPos++ {
@@ -132,9 +133,11 @@ func slideRow(row uint16) (uint16, int) {
 			continue
 		}
 		
-		if writePos > 0 && result[writePos-1] == tiles[readPos] && result[writePos-1] < 15 {
+		if writePos > 0 && result[writePos-1] == tiles[readPos] && 
+		   !merged[writePos-1] && tiles[readPos] < 15 {
 			// マージ可能
 			result[writePos-1]++
+			merged[writePos-1] = true
 			score += 1 << result[writePos-1] // 2^(exp+1)がスコア
 		} else {
 			result[writePos] = tiles[readPos]

@@ -11,11 +11,12 @@ import (
 
 // AutoPlayConfig は自動プレイの設定
 type AutoPlayConfig struct {
-	MaxDepth   int
-	Delay      time.Duration
-	Weights    []float64
-	UseAStar   bool
-	Verbose    bool
+	MaxDepth    int
+	Delay       time.Duration
+	Weights     []float64
+	UseAStar    bool
+	UseBitBoard bool
+	Verbose     bool
 }
 
 // DefaultAutoPlayConfig はデフォルトの設定を返す
@@ -42,6 +43,8 @@ func AutoPlay(w io.Writer, rng *rand.Rand, config AutoPlayConfig) (int, int) {
 
 	if config.UseAStar {
 		solver = domain.NewAStarSolver(evaluator, config.MaxDepth)
+	} else if config.UseBitBoard {
+		solver = domain.NewBitBoardSolver(evaluator, config.MaxDepth)
 	} else {
 		solver = domain.NewSolver(evaluator, config.MaxDepth)
 	}
@@ -50,7 +53,13 @@ func AutoPlay(w io.Writer, rng *rand.Rand, config AutoPlayConfig) (int, int) {
 
 	if config.Verbose {
 		fmt.Fprintln(w, "=== 2048 AutoPlay ===")
-		fmt.Fprintf(w, "Depth: %d, UseAStar: %v\n\n", config.MaxDepth, config.UseAStar)
+		mode := "Normal"
+		if config.UseAStar {
+			mode = "A*"
+		} else if config.UseBitBoard {
+			mode = "BitBoard"
+		}
+		fmt.Fprintf(w, "Depth: %d, Mode: %s\n\n", config.MaxDepth, mode)
 	}
 
 	for !game.IsGameOver() {
