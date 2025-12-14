@@ -335,3 +335,22 @@ func (e *MergeableEvaluator) Evaluate(b Board) float64 {
 	}
 	return count
 }
+
+// NewHeuristicEvaluator は標準的なヒューリスティック評価関数を生成する
+func NewHeuristicEvaluator() Evaluator {
+	evaluators := []Evaluator{
+		&LargestTilePotentialEvaluator{},
+		&EmptyCellsEvaluator{},
+		&SmoothnessEvaluator{},
+		&MonotonicityEvaluator{},
+		&MergeableEvaluator{},
+	}
+	weights := []float64{
+		1.0,  // LargestTilePotential
+		10.0, // EmptyCells
+		3.0,  // Smoothness
+		5.0,  // Monotonicity
+		2.0,  // Mergeable
+	}
+	return NewWeightedEvaluator(evaluators, weights)
+}
