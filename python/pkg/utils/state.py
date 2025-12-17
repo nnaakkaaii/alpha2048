@@ -5,25 +5,22 @@ import torch
 
 def encode_board(board: np.ndarray, device: torch.device) -> torch.Tensor:
     """
-    Encode board state as one-hot tensor.
+    Encode board state as log2 values.
 
     Args:
         board: 4x4 numpy array with tile values (0, 2, 4, 8, ...)
         device: torch device
 
     Returns:
-        Tensor of shape (1, 16, 4, 4) with one-hot encoding
-        Channel i represents tiles with value 2^i (channel 0 = empty)
+        Tensor of shape (1, 16) with log2 encoded values (normalized)
+        Empty cells are 0, tile 2 is 1/17, tile 4 is 2/17, etc.
     """
-    # Convert tile values to log2 indices (0 stays 0, 2->1, 4->2, etc.)
-    board_log = np.zeros_like(board, dtype=np.int64)
-    nonzero = board > 0
-    board_log[nonzero] = np.log2(board[nonzero]).astype(np.int64)
+    # Flatten and convert to log2 (0 stays 0, 2->1, 4->2, etc.)
+    flat = board.flatten().astype(np.float32)
+    nonzero = flat > 0
+    flat[nonzero] = np.log2(flat[nonzero])
 
-    # One-hot encode (16 channels for values 0 to 2^15)
-    one_hot = np.zeros((16, 4, 4), dtype=np.float32)
-    for i in range(4):
-        for j in range(4):
-            one_hot[board_log[i, j], i, j] = 1.0
+    # Normalize by max possible value (2^17 -> 17)
+    flat = flat / 17.0
 
-    return torch.from_numpy(one_hot).unsqueeze(0).to(device)
+    return torch.from_numpy(flat).unsqueeze(0).to(device)

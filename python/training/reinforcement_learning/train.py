@@ -9,7 +9,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 from pkg.fields import Action, Game
-from pkg.networks import CNN
+from pkg.networks import MLP
 from pkg.policies import EpsilonGreedy
 from pkg.utils import ReplayMemory, Transition, encode_board
 
@@ -23,8 +23,8 @@ LR = 1e-4
 
 def optimize_model(
     memory: ReplayMemory,
-    policy_net: CNN,
-    target_net: CNN,
+    policy_net: MLP,
+    target_net: MLP,
     optimizer: optim.Optimizer,
     device: torch.device,
 ) -> float | None:
@@ -94,8 +94,8 @@ def train(
     os.makedirs(save_dir, exist_ok=True)
 
     # Initialize networks
-    policy_net = CNN().to(device)
-    target_net = CNN().to(device)
+    policy_net = MLP().to(device)
+    target_net = MLP().to(device)
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
 

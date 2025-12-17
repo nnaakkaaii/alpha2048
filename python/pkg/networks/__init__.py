@@ -1,3 +1,3 @@
-from pkg.networks.cnn import CNN
+from pkg.networks.mlp import MLP
 
-__all__ = ["CNN"]
+__all__ = ["MLP"]

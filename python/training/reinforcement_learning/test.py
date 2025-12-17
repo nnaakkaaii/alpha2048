@@ -7,7 +7,7 @@ import time
 import torch
 
 from pkg.fields import Action, Game
-from pkg.networks import CNN
+from pkg.networks import MLP
 from pkg.policies import Greedy
 from pkg.utils import encode_board
 
@@ -21,7 +21,7 @@ def test(
 ) -> dict:
     """Test the trained agent."""
     # Load model
-    policy_net = CNN().to(device)
+    policy_net = MLP().to(device)
 
     if os.path.exists(model_path):
         state_dict = torch.load(model_path, map_location=device)
