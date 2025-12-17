@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train 2048 agent using DQN."""
+"""Train 2048 agent using Double DQN."""
 import argparse
 import os
 from collections import deque
@@ -52,21 +52,26 @@ def optimize_model(
     next_state_values = torch.zeros(BATCH_SIZE, device=device)
 
     if non_final_mask.sum() > 0:
-        # Get legal actions for non-final states
+        # Double DQN: use policy_net to select action, target_net to evaluate
         with torch.no_grad():
+            policy_q = policy_net(non_final_next_states)
             target_q = target_net(non_final_next_states)
-            # For each non-final state, get max Q over legal actions
+
             non_final_next_actions = [
                 a for a in batch.next_actions if a is not None
             ]
-            max_q_values = []
+            double_q_values = []
             for i, actions in enumerate(non_final_next_actions):
                 if actions:
-                    max_q = target_q[i, actions].max()
-                    max_q_values.append(max_q)
+                    # Select best action using policy_net (among legal actions)
+                    best_action_idx = policy_q[i, actions].argmax()
+                    best_action = actions[best_action_idx]
+                    # Evaluate using target_net
+                    q_value = target_q[i, best_action]
+                    double_q_values.append(q_value)
                 else:
-                    max_q_values.append(torch.tensor(0.0, device=device))
-            next_state_values[non_final_mask] = torch.stack(max_q_values)
+                    double_q_values.append(torch.tensor(0.0, device=device))
+            next_state_values[non_final_mask] = torch.stack(double_q_values)
 
     # Compute expected Q values
     expected_state_action_values = reward_batch + (GAMMA * next_state_values)
