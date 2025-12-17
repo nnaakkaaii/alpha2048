@@ -1,0 +1,4 @@
+# 2048 board constants
+NUM_COLUMNS = 4
+NUM_ROWS = 4
+NUM_SQUARES = NUM_COLUMNS * NUM_ROWS
