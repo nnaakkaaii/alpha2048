@@ -1,0 +1,6 @@
+"""Transition tuple for replay memory."""
+from collections import namedtuple
+
+Transition = namedtuple(
+    "Transition", ("state", "action", "next_state", "next_actions", "reward")
+)

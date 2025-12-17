@@ -11,6 +11,7 @@ requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.24.0",
     "gymnasium>=0.29.0",
+    "torch>=2.0.0",
 ]
 
 [project.optional-dependencies]
@@ -21,7 +22,9 @@ dev = [
 [project.scripts]
 play = "cli.play:main"
 autoplay = "cli.autoplay:main"
+train = "training.reinforcement_learning.train:main"
+test-model = "training.reinforcement_learning.test:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pkg*", "cli*"]
+include = ["pkg*", "cli*", "training*"]
