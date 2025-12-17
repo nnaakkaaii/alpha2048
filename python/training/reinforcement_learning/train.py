@@ -7,6 +7,7 @@ from collections import deque
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 from pkg.fields import Action, Game
 from pkg.networks import MLP
@@ -17,8 +18,11 @@ from pkg.utils import ReplayMemory, Transition, encode_board
 GAMMA = 0.99
 BATCH_SIZE = 128
 TARGET_UPDATE = 100
-MEMORY_SIZE = 50000
-LR = 1e-4
+MEMORY_SIZE = 100000  # Larger memory for long training
+LR = 3e-4  # Slightly higher initial LR for AdamW
+WEIGHT_DECAY = 1e-5  # L2 regularization
+T_0 = 1000  # Cosine annealing: restart every T_0 episodes
+T_MULT = 2  # Each restart doubles the period
 
 
 def optimize_model(
@@ -104,30 +108,52 @@ def train(
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
 
-    # Load existing model if available
+    # AdamW optimizer with weight decay
+    optimizer = optim.AdamW(policy_net.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
+
+    # Cosine annealing with warm restarts - escapes local optima
+    scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=T_0, T_mult=T_MULT)
+
+    # Epsilon-greedy with slower decay for long training
+    # eps_decay=10000 means ~37% of initial exploration at 10000 steps
+    policy = EpsilonGreedy(policy_net, eps_start=1.0, eps_end=0.01, eps_decay=50000)
+
+    memory = ReplayMemory(MEMORY_SIZE)
+
+    # Statistics
+    recent_scores = deque(maxlen=100)
+    recent_max_tiles = deque(maxlen=100)
+    steps_done = 0
+    start_episode = 0
+    best_avg_score = 0
+
+    # Load checkpoint if available (includes optimizer, scheduler state)
     model_path = os.path.join(save_dir, "model.pth")
-    if os.path.exists(model_path):
+    checkpoint_path = os.path.join(save_dir, "checkpoint.pth")
+
+    if os.path.exists(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path, map_location=device)
+        policy_net.load_state_dict(checkpoint["model_state"])
+        target_net.load_state_dict(checkpoint["model_state"])
+        optimizer.load_state_dict(checkpoint["optimizer_state"])
+        scheduler.load_state_dict(checkpoint["scheduler_state"])
+        steps_done = checkpoint["steps_done"]
+        start_episode = checkpoint["episode"]
+        best_avg_score = checkpoint.get("best_avg_score", 0)
+        if verbose:
+            print(f"Resumed from episode {start_episode}, steps {steps_done}")
+    elif os.path.exists(model_path):
         state_dict = torch.load(model_path, map_location=device)
         policy_net.load_state_dict(state_dict)
         target_net.load_state_dict(state_dict)
         if verbose:
             print(f"Loaded model from {model_path}")
 
-    optimizer = optim.Adam(policy_net.parameters(), lr=LR)
-    memory = ReplayMemory(MEMORY_SIZE)
-    policy = EpsilonGreedy(policy_net)
-
-    # Statistics
-    recent_scores = deque(maxlen=100)
-    recent_max_tiles = deque(maxlen=100)
-    steps_done = 0
-
     game = Game()
 
-    for episode in range(num_episodes):
+    for episode in range(start_episode, num_episodes):
         board = game.reset()
         state = encode_board(board, device)
-        episode_reward = 0
 
         while True:
             # Get legal actions
@@ -143,13 +169,11 @@ def train(
             # Execute action
             score_gained, done = game.step(Action(action))
 
-            # Reward shaping: use log of score gained
+            # Reward shaping: normalize by typical max score
             if score_gained > 0:
-                reward = score_gained / 100.0  # Normalize reward
+                reward = score_gained / 100.0
             else:
                 reward = 0.0
-
-            episode_reward += score_gained
 
             # Get next state
             if not done:
@@ -181,27 +205,51 @@ def train(
         # Optimize model
         loss = optimize_model(memory, policy_net, target_net, optimizer, device)
 
+        # Step scheduler (per episode)
+        scheduler.step()
+
         # Update target network
         if episode % TARGET_UPDATE == 0:
             target_net.load_state_dict(policy_net.state_dict())
 
-        # Save model
+        # Calculate current stats
+        avg_score = sum(recent_scores) / len(recent_scores) if recent_scores else 0
+
+        # Save checkpoint (with full state for resume)
         if episode % save_interval == 0 and episode > 0:
+            # Save best model separately
+            if avg_score > best_avg_score:
+                best_avg_score = avg_score
+                torch.save(policy_net.state_dict(), os.path.join(save_dir, "best_model.pth"))
+
+            # Save checkpoint for resume
+            checkpoint = {
+                "model_state": policy_net.state_dict(),
+                "optimizer_state": optimizer.state_dict(),
+                "scheduler_state": scheduler.state_dict(),
+                "steps_done": steps_done,
+                "episode": episode,
+                "best_avg_score": best_avg_score,
+            }
+            torch.save(checkpoint, checkpoint_path)
             torch.save(policy_net.state_dict(), model_path)
             if verbose:
-                print(f"Model saved to {model_path}")
+                print(f"Checkpoint saved (episode {episode}, best avg: {best_avg_score:.1f})")
 
         # Print progress
         if verbose and episode % 100 == 0:
-            avg_score = sum(recent_scores) / len(recent_scores) if recent_scores else 0
             avg_max = sum(recent_max_tiles) / len(recent_max_tiles) if recent_max_tiles else 0
             loss_str = f"{loss:.4f}" if loss is not None else "N/A"
+            current_lr = scheduler.get_last_lr()[0]
+            eps = policy.eps_end + (policy.eps_start - policy.eps_end) * \
+                  __import__("math").exp(-steps_done / policy.eps_decay)
             print(
                 f"Episode {episode:5d} | "
                 f"Avg Score: {avg_score:8.1f} | "
                 f"Avg Max Tile: {avg_max:6.1f} | "
                 f"Loss: {loss_str} | "
-                f"Memory: {len(memory):5d}"
+                f"LR: {current_lr:.2e} | "
+                f"Eps: {eps:.3f}"
             )
 
     # Save final model
