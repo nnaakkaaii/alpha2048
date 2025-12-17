@@ -1,5 +1,7 @@
-# Git作業原則
+# Alpha2048
 
-- **mainブランチに直接pushしない**
-- 必ず別ブランチ→PR作成
-- 例: `git checkout -b feat/xxx` → commit → `git push origin feat/xxx` → `gh pr create`
+## プロジェクト構造
+
+- `/go` - Go言語実装
+- `/python` - Python実装（予定）
+- 各言語固有のルールは各ディレクトリの`CLAUDE.md`参照

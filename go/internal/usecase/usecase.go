@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"strings"
 
-	"github.com/nnaakkaaii/alpha2048/internal/domain"
+	"github.com/nnaakkaaii/alpha2048/go/internal/domain"
 )
 
 // PlayGame はCLIで2048ゲームを実行する
