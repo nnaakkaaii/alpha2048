@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/nnaakkaaii/alpha2048/internal/usecase"
+	"github.com/nnaakkaaii/alpha2048/go/internal/usecase"
 )
 
 func main() {

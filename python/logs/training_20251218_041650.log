@@ -1,0 +1,532 @@
+=== 2048 DQN長時間学習開始 ===
+開始時刻: Thu Dec 18 04:16:50 UTC 2025
+エピソード数: 50000
+保存間隔: 1000エピソード
+ログファイル: logs/training_20251218_041650.log
+================================
+学習プロセスID: 947990
+
+=== 学習がバックグラウンドで開始されました ===
+
+進捗確認方法:
+  tail -f logs/training_20251218_041650.log
+
+最新の統計確認:
+  grep 'Episode' logs/training_20251218_041650.log | tail -10
+
+プロセス確認:
+  ps -p 947990
+
+学習を停止する場合:
+  kill 947990
+
+モデルテスト（別ターミナルで実行可能）:
+  source .venv/bin/activate
+  python training/reinforcement_learning/test.py --games 100
+
+最良モデルのテスト:
+  python training/reinforcement_learning/test.py --model checkpoints/best_model.pth --games 100
+================================
+Using device: cpu
+Resumed from episode 4500, steps 546412
+Episode  4500 | Avg Score:   1324.0 | Avg Max Tile:  128.0 | Loss: N/A | LR: 2.07e-04 | Eps: 0.342
+Episode  4600 | Avg Score:   1179.2 | Avg Max Tile:  107.5 | Loss: 0.1238 | LR: 1.96e-04 | Eps: 0.334
+Episode  4700 | Avg Score:   1192.9 | Avg Max Tile:  106.9 | Loss: 0.1384 | LR: 1.85e-04 | Eps: 0.325
+Episode  4800 | Avg Score:   1186.1 | Avg Max Tile:  109.4 | Loss: 0.3068 | LR: 1.73e-04 | Eps: 0.317
+Episode  4900 | Avg Score:   1102.6 | Avg Max Tile:   98.4 | Loss: 0.6153 | LR: 1.61e-04 | Eps: 0.310
+Checkpoint saved (episode 5000, best avg: 1268.4)
+Episode  5000 | Avg Score:   1267.5 | Avg Max Tile:  117.3 | Loss: 1.0815 | LR: 1.50e-04 | Eps: 0.302
+Episode  5100 | Avg Score:   1092.6 | Avg Max Tile:  101.3 | Loss: 0.4242 | LR: 1.38e-04 | Eps: 0.295
+Episode  5200 | Avg Score:   1201.8 | Avg Max Tile:  109.4 | Loss: 0.1847 | LR: 1.26e-04 | Eps: 0.288
+Episode  5300 | Avg Score:   1151.0 | Avg Max Tile:  106.6 | Loss: 0.1035 | LR: 1.15e-04 | Eps: 0.281
+Episode  5400 | Avg Score:   1203.6 | Avg Max Tile:  114.9 | Loss: 0.0959 | LR: 1.03e-04 | Eps: 0.275
+Episode  5500 | Avg Score:   1192.9 | Avg Max Tile:  112.6 | Loss: 0.0665 | LR: 9.22e-05 | Eps: 0.268
+Episode  5600 | Avg Score:   1235.2 | Avg Max Tile:  113.3 | Loss: 0.1369 | LR: 8.15e-05 | Eps: 0.261
+Episode  5700 | Avg Score:   1295.8 | Avg Max Tile:  119.0 | Loss: 0.2225 | LR: 7.12e-05 | Eps: 0.255
+Episode  5800 | Avg Score:   1004.4 | Avg Max Tile:   95.5 | Loss: 1.0438 | LR: 6.15e-05 | Eps: 0.249
+Episode  5900 | Avg Score:   1236.8 | Avg Max Tile:  112.3 | Loss: 1.7427 | LR: 5.22e-05 | Eps: 0.243
+Checkpoint saved (episode 6000, best avg: 1268.4)
+Episode  6000 | Avg Score:   1257.8 | Avg Max Tile:  111.0 | Loss: 2.7068 | LR: 4.36e-05 | Eps: 0.237
+Episode  6100 | Avg Score:   1263.5 | Avg Max Tile:  109.8 | Loss: 8.4464 | LR: 3.56e-05 | Eps: 0.231
+Episode  6200 | Avg Score:   1352.0 | Avg Max Tile:  121.3 | Loss: 4.1720 | LR: 2.84e-05 | Eps: 0.225
+Episode  6300 | Avg Score:   1199.0 | Avg Max Tile:  111.2 | Loss: 3.8458 | LR: 2.19e-05 | Eps: 0.219
+Episode  6400 | Avg Score:   1490.4 | Avg Max Tile:  138.2 | Loss: 11.2017 | LR: 1.61e-05 | Eps: 0.213
+Episode  6500 | Avg Score:   1539.4 | Avg Max Tile:  137.9 | Loss: 6.5028 | LR: 1.12e-05 | Eps: 0.207
+Episode  6600 | Avg Score:   1424.2 | Avg Max Tile:  127.7 | Loss: 19.2124 | LR: 7.20e-06 | Eps: 0.202
+Episode  6700 | Avg Score:   1384.4 | Avg Max Tile:  125.6 | Loss: 6.7328 | LR: 4.04e-06 | Eps: 0.196
+Episode  6800 | Avg Score:   1323.2 | Avg Max Tile:  118.1 | Loss: 13.4113 | LR: 1.77e-06 | Eps: 0.191
+Episode  6900 | Avg Score:   1413.7 | Avg Max Tile:  126.4 | Loss: 8.4574 | LR: 4.26e-07 | Eps: 0.186
+Checkpoint saved (episode 7000, best avg: 1323.8)
+Episode  7000 | Avg Score:   1323.8 | Avg Max Tile:  116.5 | Loss: 35.2458 | LR: 3.00e-04 | Eps: 0.181
+Episode  7100 | Avg Score:   1525.4 | Avg Max Tile:  135.4 | Loss: 7.2286 | LR: 3.00e-04 | Eps: 0.176
+Episode  7200 | Avg Score:   1196.2 | Avg Max Tile:  109.8 | Loss: 22.2867 | LR: 3.00e-04 | Eps: 0.172
+Episode  7300 | Avg Score:   1390.5 | Avg Max Tile:  125.8 | Loss: 11.8449 | LR: 2.99e-04 | Eps: 0.168
+Episode  7400 | Avg Score:   1426.9 | Avg Max Tile:  126.1 | Loss: 15.6597 | LR: 2.98e-04 | Eps: 0.163
+Episode  7500 | Avg Score:   1352.0 | Avg Max Tile:  119.7 | Loss: 7.3626 | LR: 2.97e-04 | Eps: 0.159
+Episode  7600 | Avg Score:   1161.9 | Avg Max Tile:  104.3 | Loss: 6.6119 | LR: 2.96e-04 | Eps: 0.155
+Episode  7700 | Avg Score:   1366.0 | Avg Max Tile:  122.6 | Loss: 4.1660 | LR: 2.94e-04 | Eps: 0.151
+Episode  7800 | Avg Score:   1345.9 | Avg Max Tile:  119.0 | Loss: 3.8099 | LR: 2.93e-04 | Eps: 0.147
+Episode  7900 | Avg Score:   1416.1 | Avg Max Tile:  125.8 | Loss: 6.2913 | LR: 2.91e-04 | Eps: 0.143
+Checkpoint saved (episode 8000, best avg: 1547.5)
+Episode  8000 | Avg Score:   1547.5 | Avg Max Tile:  130.6 | Loss: 8.7547 | LR: 2.88e-04 | Eps: 0.139
+Episode  8100 | Avg Score:   1581.4 | Avg Max Tile:  138.9 | Loss: 35.1281 | LR: 2.86e-04 | Eps: 0.135
+Episode  8200 | Avg Score:   1592.4 | Avg Max Tile:  136.0 | Loss: 44.2743 | LR: 2.84e-04 | Eps: 0.132
+Episode  8300 | Avg Score:   1596.1 | Avg Max Tile:  134.7 | Loss: 41.1107 | LR: 2.81e-04 | Eps: 0.128
+Episode  8400 | Avg Score:   1662.1 | Avg Max Tile:  146.7 | Loss: 19.5746 | LR: 2.78e-04 | Eps: 0.124
+Episode  8500 | Avg Score:   1206.0 | Avg Max Tile:  108.8 | Loss: 6.8713 | LR: 2.75e-04 | Eps: 0.121
+Episode  8600 | Avg Score:   1093.2 | Avg Max Tile:  101.6 | Loss: 4.5732 | LR: 2.71e-04 | Eps: 0.118
+Episode  8700 | Avg Score:   1212.2 | Avg Max Tile:  108.8 | Loss: 2.1029 | LR: 2.68e-04 | Eps: 0.116
+Episode  8800 | Avg Score:   1294.0 | Avg Max Tile:  118.4 | Loss: 2.0361 | LR: 2.64e-04 | Eps: 0.113
+Episode  8900 | Avg Score:   1313.2 | Avg Max Tile:  116.2 | Loss: 1.8508 | LR: 2.60e-04 | Eps: 0.110
+Checkpoint saved (episode 9000, best avg: 1547.5)
+Episode  9000 | Avg Score:   1100.2 | Avg Max Tile:   99.7 | Loss: 2.0211 | LR: 2.56e-04 | Eps: 0.108
+Episode  9100 | Avg Score:   1215.7 | Avg Max Tile:  103.7 | Loss: 4.3755 | LR: 2.52e-04 | Eps: 0.105
+Episode  9200 | Avg Score:   1720.5 | Avg Max Tile:  145.0 | Loss: 9.2873 | LR: 2.47e-04 | Eps: 0.102
+Episode  9300 | Avg Score:   1577.5 | Avg Max Tile:  140.8 | Loss: 6.6611 | LR: 2.43e-04 | Eps: 0.099
+Episode  9400 | Avg Score:   1311.4 | Avg Max Tile:  116.5 | Loss: 3.6736 | LR: 2.38e-04 | Eps: 0.097
+Episode  9500 | Avg Score:   1356.2 | Avg Max Tile:  120.3 | Loss: 2.3829 | LR: 2.33e-04 | Eps: 0.094
+Episode  9600 | Avg Score:   1270.3 | Avg Max Tile:  114.7 | Loss: 3.5332 | LR: 2.28e-04 | Eps: 0.092
+Episode  9700 | Avg Score:   1350.0 | Avg Max Tile:  123.5 | Loss: 3.6387 | LR: 2.23e-04 | Eps: 0.090
+Episode  9800 | Avg Score:   1529.1 | Avg Max Tile:  132.8 | Loss: 8.6932 | LR: 2.18e-04 | Eps: 0.088
+Episode  9900 | Avg Score:   1204.1 | Avg Max Tile:  108.6 | Loss: 3.4661 | LR: 2.13e-04 | Eps: 0.086
+Checkpoint saved (episode 10000, best avg: 1547.5)
+Episode 10000 | Avg Score:   1137.3 | Avg Max Tile:  105.0 | Loss: 3.4987 | LR: 2.07e-04 | Eps: 0.084
+Episode 10100 | Avg Score:   1224.8 | Avg Max Tile:  112.6 | Loss: 5.2168 | LR: 2.02e-04 | Eps: 0.082
+Episode 10200 | Avg Score:   1149.4 | Avg Max Tile:  102.6 | Loss: 4.0918 | LR: 1.96e-04 | Eps: 0.080
+Episode 10300 | Avg Score:   1135.0 | Avg Max Tile:  104.0 | Loss: 5.1574 | LR: 1.90e-04 | Eps: 0.078
+Episode 10400 | Avg Score:   1230.9 | Avg Max Tile:  114.1 | Loss: 14.3464 | LR: 1.85e-04 | Eps: 0.077
+Episode 10500 | Avg Score:   1556.7 | Avg Max Tile:  133.4 | Loss: 19.5654 | LR: 1.79e-04 | Eps: 0.075
+Episode 10600 | Avg Score:   1726.4 | Avg Max Tile:  149.4 | Loss: 34.3137 | LR: 1.73e-04 | Eps: 0.072
+Episode 10700 | Avg Score:   1705.6 | Avg Max Tile:  143.4 | Loss: 24.1187 | LR: 1.67e-04 | Eps: 0.070
+Episode 10800 | Avg Score:   1347.2 | Avg Max Tile:  120.6 | Loss: 29.0935 | LR: 1.62e-04 | Eps: 0.069
+Episode 10900 | Avg Score:   1443.5 | Avg Max Tile:  128.6 | Loss: 33.1416 | LR: 1.56e-04 | Eps: 0.067
+Checkpoint saved (episode 11000, best avg: 1547.5)
+Episode 11000 | Avg Score:   1347.4 | Avg Max Tile:  120.6 | Loss: 13.9164 | LR: 1.50e-04 | Eps: 0.066
+Episode 11100 | Avg Score:   1185.2 | Avg Max Tile:  109.4 | Loss: 36.4156 | LR: 1.44e-04 | Eps: 0.064
+Episode 11200 | Avg Score:   1297.1 | Avg Max Tile:  113.4 | Loss: 183.2269 | LR: 1.38e-04 | Eps: 0.063
+Episode 11300 | Avg Score:   1436.7 | Avg Max Tile:  127.4 | Loss: 58.2510 | LR: 1.32e-04 | Eps: 0.061
+Episode 11400 | Avg Score:   1481.6 | Avg Max Tile:  132.5 | Loss: 106.9689 | LR: 1.26e-04 | Eps: 0.060
+Episode 11500 | Avg Score:   1343.2 | Avg Max Tile:  118.1 | Loss: 136.7980 | LR: 1.21e-04 | Eps: 0.058
+Episode 11600 | Avg Score:   1938.8 | Avg Max Tile:  160.6 | Loss: 94.1054 | LR: 1.15e-04 | Eps: 0.057
+Episode 11700 | Avg Score:   1685.6 | Avg Max Tile:  145.6 | Loss: 380.7775 | LR: 1.09e-04 | Eps: 0.055
+Episode 11800 | Avg Score:   1735.5 | Avg Max Tile:  142.1 | Loss: 94.0151 | LR: 1.03e-04 | Eps: 0.054
+Episode 11900 | Avg Score:   1708.8 | Avg Max Tile:  141.3 | Loss: 200.3988 | LR: 9.79e-05 | Eps: 0.052
+Checkpoint saved (episode 12000, best avg: 1547.5)
+Episode 12000 | Avg Score:   1356.3 | Avg Max Tile:  117.8 | Loss: 124.1862 | LR: 9.24e-05 | Eps: 0.051
+Episode 12100 | Avg Score:   1885.4 | Avg Max Tile:  155.5 | Loss: 136.8172 | LR: 8.70e-05 | Eps: 0.050
+Episode 12200 | Avg Score:   1894.4 | Avg Max Tile:  148.8 | Loss: 129.8438 | LR: 8.17e-05 | Eps: 0.048
+Episode 12300 | Avg Score:   1659.5 | Avg Max Tile:  138.2 | Loss: 4390.8960 | LR: 7.65e-05 | Eps: 0.047
+Episode 12400 | Avg Score:   1629.7 | Avg Max Tile:  137.3 | Loss: 140.8701 | LR: 7.14e-05 | Eps: 0.046
+Episode 12500 | Avg Score:   1756.9 | Avg Max Tile:  147.7 | Loss: 972.5375 | LR: 6.65e-05 | Eps: 0.045
+Episode 12600 | Avg Score:   1749.4 | Avg Max Tile:  149.3 | Loss: 363.7208 | LR: 6.16e-05 | Eps: 0.043
+Episode 12700 | Avg Score:   1708.4 | Avg Max Tile:  138.2 | Loss: 853.3380 | LR: 5.70e-05 | Eps: 0.042
+Episode 12800 | Avg Score:   1775.3 | Avg Max Tile:  141.4 | Loss: 353.1793 | LR: 5.24e-05 | Eps: 0.041
+Episode 12900 | Avg Score:   1662.2 | Avg Max Tile:  135.0 | Loss: 506.7536 | LR: 4.80e-05 | Eps: 0.040
+Checkpoint saved (episode 13000, best avg: 1790.9)
+Episode 13000 | Avg Score:   1790.9 | Avg Max Tile:  148.2 | Loss: 377.1407 | LR: 4.38e-05 | Eps: 0.039
+Episode 13100 | Avg Score:   1782.2 | Avg Max Tile:  149.8 | Loss: 130.8797 | LR: 3.97e-05 | Eps: 0.038
+Episode 13200 | Avg Score:   1802.8 | Avg Max Tile:  147.0 | Loss: 213.0838 | LR: 3.58e-05 | Eps: 0.037
+Episode 13300 | Avg Score:   1884.7 | Avg Max Tile:  159.4 | Loss: 155.5720 | LR: 3.21e-05 | Eps: 0.036
+Episode 13400 | Avg Score:   1980.2 | Avg Max Tile:  173.4 | Loss: 227.1628 | LR: 2.85e-05 | Eps: 0.035
+Episode 13500 | Avg Score:   1987.8 | Avg Max Tile:  167.0 | Loss: 449.3951 | LR: 2.51e-05 | Eps: 0.035
+Episode 13600 | Avg Score:   1957.0 | Avg Max Tile:  160.0 | Loss: 81.3346 | LR: 2.20e-05 | Eps: 0.034
+Episode 13700 | Avg Score:   1959.2 | Avg Max Tile:  169.9 | Loss: 143.6003 | LR: 1.90e-05 | Eps: 0.033
+Episode 13800 | Avg Score:   1949.4 | Avg Max Tile:  158.1 | Loss: 140.5329 | LR: 1.62e-05 | Eps: 0.032
+Episode 13900 | Avg Score:   1993.0 | Avg Max Tile:  162.2 | Loss: 578.2349 | LR: 1.37e-05 | Eps: 0.031
+Checkpoint saved (episode 14000, best avg: 1790.9)
+Episode 14000 | Avg Score:   1788.8 | Avg Max Tile:  149.1 | Loss: 166.9889 | LR: 1.13e-05 | Eps: 0.030
+Episode 14100 | Avg Score:   1965.2 | Avg Max Tile:  161.9 | Loss: 99.4440 | LR: 9.19e-06 | Eps: 0.030
+Episode 14200 | Avg Score:   1964.9 | Avg Max Tile:  160.2 | Loss: 86.9586 | LR: 7.27e-06 | Eps: 0.029
+Episode 14300 | Avg Score:   1933.9 | Avg Max Tile:  153.6 | Loss: 68.0300 | LR: 5.57e-06 | Eps: 0.028
+Episode 14400 | Avg Score:   2403.6 | Avg Max Tile:  193.9 | Loss: 93.2937 | LR: 4.09e-06 | Eps: 0.028
+Episode 14500 | Avg Score:   2250.4 | Avg Max Tile:  179.2 | Loss: 91.1588 | LR: 2.84e-06 | Eps: 0.027
+Episode 14600 | Avg Score:   2407.0 | Avg Max Tile:  192.6 | Loss: 410.8551 | LR: 1.81e-06 | Eps: 0.026
+Episode 14700 | Avg Score:   2442.0 | Avg Max Tile:  201.9 | Loss: 467.9985 | LR: 1.01e-06 | Eps: 0.026
+Episode 14800 | Avg Score:   2444.9 | Avg Max Tile:  199.0 | Loss: 113.3438 | LR: 4.44e-07 | Eps: 0.025
+Episode 14900 | Avg Score:   2250.2 | Avg Max Tile:  182.1 | Loss: 116.2197 | LR: 1.07e-07 | Eps: 0.024
+Checkpoint saved (episode 15000, best avg: 2349.4)
+Episode 15000 | Avg Score:   2349.4 | Avg Max Tile:  188.5 | Loss: 214.5365 | LR: 3.00e-04 | Eps: 0.024
+Episode 15100 | Avg Score:   2061.5 | Avg Max Tile:  174.4 | Loss: 91.8662 | LR: 3.00e-04 | Eps: 0.023
+Episode 15200 | Avg Score:   2141.8 | Avg Max Tile:  181.4 | Loss: 90.8173 | LR: 3.00e-04 | Eps: 0.023
+Episode 15300 | Avg Score:   2237.2 | Avg Max Tile:  176.6 | Loss: 56.9455 | LR: 3.00e-04 | Eps: 0.022
+Episode 15400 | Avg Score:   2283.1 | Avg Max Tile:  186.9 | Loss: 81.7022 | LR: 3.00e-04 | Eps: 0.022
+Episode 15500 | Avg Score:   2133.5 | Avg Max Tile:  165.4 | Loss: 71.4756 | LR: 2.99e-04 | Eps: 0.021
+Episode 15600 | Avg Score:   1992.6 | Avg Max Tile:  159.8 | Loss: 50.6595 | LR: 2.99e-04 | Eps: 0.021
+Episode 15700 | Avg Score:   1565.6 | Avg Max Tile:  122.4 | Loss: 94.8458 | LR: 2.99e-04 | Eps: 0.021
+Episode 15800 | Avg Score:   1817.8 | Avg Max Tile:  146.6 | Loss: 68.0201 | LR: 2.98e-04 | Eps: 0.020
+Episode 15900 | Avg Score:   2053.3 | Avg Max Tile:  165.1 | Loss: 71.5173 | LR: 2.98e-04 | Eps: 0.020
+Checkpoint saved (episode 16000, best avg: 2349.4)
+Episode 16000 | Avg Score:   2101.5 | Avg Max Tile:  168.8 | Loss: 49.9989 | LR: 2.97e-04 | Eps: 0.019
+Episode 16100 | Avg Score:   1977.2 | Avg Max Tile:  159.8 | Loss: 48.9215 | LR: 2.96e-04 | Eps: 0.019
+Episode 16200 | Avg Score:   2275.0 | Avg Max Tile:  180.5 | Loss: 52.8027 | LR: 2.96e-04 | Eps: 0.019
+Episode 16300 | Avg Score:   2272.6 | Avg Max Tile:  182.7 | Loss: 59.9378 | LR: 2.95e-04 | Eps: 0.018
+Episode 16400 | Avg Score:   2376.5 | Avg Max Tile:  196.2 | Loss: 47.9852 | LR: 2.94e-04 | Eps: 0.018
+Episode 16500 | Avg Score:   2113.0 | Avg Max Tile:  172.3 | Loss: 43.2975 | LR: 2.94e-04 | Eps: 0.018
+Episode 16600 | Avg Score:   2426.7 | Avg Max Tile:  190.1 | Loss: 40.8629 | LR: 2.93e-04 | Eps: 0.017
+Episode 16700 | Avg Score:   1998.6 | Avg Max Tile:  154.1 | Loss: 68.5864 | LR: 2.92e-04 | Eps: 0.017
+Episode 16800 | Avg Score:   2320.3 | Avg Max Tile:  184.3 | Loss: 65.5155 | LR: 2.91e-04 | Eps: 0.017
+Episode 16900 | Avg Score:   2340.4 | Avg Max Tile:  184.3 | Loss: 43.9132 | LR: 2.90e-04 | Eps: 0.017
+Checkpoint saved (episode 17000, best avg: 2349.4)
+Episode 17000 | Avg Score:   2265.8 | Avg Max Tile:  181.1 | Loss: 36.4905 | LR: 2.89e-04 | Eps: 0.016
+Episode 17100 | Avg Score:   2484.0 | Avg Max Tile:  197.4 | Loss: 35.7724 | LR: 2.87e-04 | Eps: 0.016
+Episode 17200 | Avg Score:   2271.0 | Avg Max Tile:  183.0 | Loss: 48.9178 | LR: 2.86e-04 | Eps: 0.016
+Episode 17300 | Avg Score:   2593.0 | Avg Max Tile:  204.8 | Loss: 27.1881 | LR: 2.85e-04 | Eps: 0.016
+Episode 17400 | Avg Score:   2130.3 | Avg Max Tile:  171.5 | Loss: 61.1617 | LR: 2.84e-04 | Eps: 0.015
+Episode 17500 | Avg Score:   2420.9 | Avg Max Tile:  195.5 | Loss: 44.4491 | LR: 2.82e-04 | Eps: 0.015
+Episode 17600 | Avg Score:   2321.0 | Avg Max Tile:  179.8 | Loss: 26.0540 | LR: 2.81e-04 | Eps: 0.015
+Episode 17700 | Avg Score:   2454.5 | Avg Max Tile:  196.8 | Loss: 20.5683 | LR: 2.79e-04 | Eps: 0.015
+Episode 17800 | Avg Score:   2268.3 | Avg Max Tile:  179.2 | Loss: 54.6578 | LR: 2.78e-04 | Eps: 0.014
+Episode 17900 | Avg Score:   2030.2 | Avg Max Tile:  163.5 | Loss: 35.4924 | LR: 2.76e-04 | Eps: 0.014
+Checkpoint saved (episode 18000, best avg: 2349.4)
+Episode 18000 | Avg Score:   2321.3 | Avg Max Tile:  187.2 | Loss: 19.8922 | LR: 2.75e-04 | Eps: 0.014
+Episode 18100 | Avg Score:   2394.1 | Avg Max Tile:  194.9 | Loss: 22.9508 | LR: 2.73e-04 | Eps: 0.014
+Episode 18200 | Avg Score:   2226.2 | Avg Max Tile:  184.3 | Loss: 23.8032 | LR: 2.71e-04 | Eps: 0.014
+Episode 18300 | Avg Score:   2413.2 | Avg Max Tile:  200.6 | Loss: 14.7976 | LR: 2.70e-04 | Eps: 0.014
+Episode 18400 | Avg Score:   2195.5 | Avg Max Tile:  180.5 | Loss: 28.1767 | LR: 2.68e-04 | Eps: 0.014
+Episode 18500 | Avg Score:   1884.2 | Avg Max Tile:  147.7 | Loss: 11.8242 | LR: 2.66e-04 | Eps: 0.013
+Episode 18600 | Avg Score:   2622.9 | Avg Max Tile:  212.2 | Loss: 15.4196 | LR: 2.64e-04 | Eps: 0.013
+Episode 18700 | Avg Score:   2253.0 | Avg Max Tile:  181.9 | Loss: 14.7514 | LR: 2.62e-04 | Eps: 0.013
+Episode 18800 | Avg Score:   2186.0 | Avg Max Tile:  177.6 | Loss: 13.3645 | LR: 2.60e-04 | Eps: 0.013
+Episode 18900 | Avg Score:   1980.9 | Avg Max Tile:  158.7 | Loss: 19.7173 | LR: 2.58e-04 | Eps: 0.013
+Checkpoint saved (episode 19000, best avg: 2349.4)
+Episode 19000 | Avg Score:   2275.4 | Avg Max Tile:  181.1 | Loss: 15.7962 | LR: 2.56e-04 | Eps: 0.013
+Episode 19100 | Avg Score:   2303.3 | Avg Max Tile:  188.8 | Loss: 37.7098 | LR: 2.54e-04 | Eps: 0.013
+Episode 19200 | Avg Score:   2465.0 | Avg Max Tile:  195.8 | Loss: 19.9585 | LR: 2.52e-04 | Eps: 0.013
+Episode 19300 | Avg Score:   2177.6 | Avg Max Tile:  169.8 | Loss: 15.9686 | LR: 2.50e-04 | Eps: 0.012
+Episode 19400 | Avg Score:   2147.6 | Avg Max Tile:  173.4 | Loss: 19.0188 | LR: 2.47e-04 | Eps: 0.012
+Episode 19500 | Avg Score:   2260.6 | Avg Max Tile:  183.7 | Loss: 23.2776 | LR: 2.45e-04 | Eps: 0.012
+Episode 19600 | Avg Score:   2180.7 | Avg Max Tile:  178.1 | Loss: 14.1371 | LR: 2.43e-04 | Eps: 0.012
+Episode 19700 | Avg Score:   2314.8 | Avg Max Tile:  184.3 | Loss: 16.7920 | LR: 2.40e-04 | Eps: 0.012
+Episode 19800 | Avg Score:   2050.0 | Avg Max Tile:  163.8 | Loss: 27.1340 | LR: 2.38e-04 | Eps: 0.012
+Episode 19900 | Avg Score:   2379.8 | Avg Max Tile:  199.7 | Loss: 18.1593 | LR: 2.36e-04 | Eps: 0.012
+Checkpoint saved (episode 20000, best avg: 2349.4)
+Episode 20000 | Avg Score:   2072.9 | Avg Max Tile:  161.8 | Loss: 12.0916 | LR: 2.33e-04 | Eps: 0.012
+Episode 20100 | Avg Score:   2056.9 | Avg Max Tile:  165.9 | Loss: 19.2892 | LR: 2.31e-04 | Eps: 0.012
+Episode 20200 | Avg Score:   2246.4 | Avg Max Tile:  178.2 | Loss: 14.9365 | LR: 2.28e-04 | Eps: 0.012
+Episode 20300 | Avg Score:   2335.4 | Avg Max Tile:  184.3 | Loss: 6.9590 | LR: 2.26e-04 | Eps: 0.012
+Episode 20400 | Avg Score:   2067.9 | Avg Max Tile:  160.0 | Loss: 12.7127 | LR: 2.23e-04 | Eps: 0.012
+Episode 20500 | Avg Score:   2331.8 | Avg Max Tile:  177.3 | Loss: 18.1866 | LR: 2.21e-04 | Eps: 0.012
+Episode 20600 | Avg Score:   2136.5 | Avg Max Tile:  167.7 | Loss: 9.6657 | LR: 2.18e-04 | Eps: 0.011
+Episode 20700 | Avg Score:   2243.6 | Avg Max Tile:  184.0 | Loss: 13.0269 | LR: 2.15e-04 | Eps: 0.011
+Episode 20800 | Avg Score:   1999.3 | Avg Max Tile:  169.3 | Loss: 12.2847 | LR: 2.13e-04 | Eps: 0.011
+Episode 20900 | Avg Score:   1780.6 | Avg Max Tile:  143.7 | Loss: 10.9772 | LR: 2.10e-04 | Eps: 0.011
+Checkpoint saved (episode 21000, best avg: 2349.4)
+Episode 21000 | Avg Score:   2088.7 | Avg Max Tile:  166.4 | Loss: 19.4951 | LR: 2.07e-04 | Eps: 0.011
+Episode 21100 | Avg Score:   1744.4 | Avg Max Tile:  145.6 | Loss: 12.3075 | LR: 2.05e-04 | Eps: 0.011
+Episode 21200 | Avg Score:   1776.5 | Avg Max Tile:  142.1 | Loss: 14.3330 | LR: 2.02e-04 | Eps: 0.011
+Episode 21300 | Avg Score:   1825.9 | Avg Max Tile:  150.7 | Loss: 11.1836 | LR: 1.99e-04 | Eps: 0.011
+Episode 21400 | Avg Score:   2034.0 | Avg Max Tile:  171.4 | Loss: 13.6687 | LR: 1.96e-04 | Eps: 0.011
+Episode 21500 | Avg Score:   2079.0 | Avg Max Tile:  173.9 | Loss: 8.2800 | LR: 1.93e-04 | Eps: 0.011
+Episode 21600 | Avg Score:   1840.1 | Avg Max Tile:  157.6 | Loss: 9.3743 | LR: 1.91e-04 | Eps: 0.011
+Episode 21700 | Avg Score:   1993.3 | Avg Max Tile:  167.7 | Loss: 23.5279 | LR: 1.88e-04 | Eps: 0.011
+Episode 21800 | Avg Score:   1649.6 | Avg Max Tile:  133.0 | Loss: 6.0842 | LR: 1.85e-04 | Eps: 0.011
+Episode 21900 | Avg Score:   2076.1 | Avg Max Tile:  170.6 | Loss: 5.9933 | LR: 1.82e-04 | Eps: 0.011
+Checkpoint saved (episode 22000, best avg: 2349.4)
+Episode 22000 | Avg Score:   2131.1 | Avg Max Tile:  169.0 | Loss: 11.7777 | LR: 1.79e-04 | Eps: 0.011
+Episode 22100 | Avg Score:   2086.4 | Avg Max Tile:  182.1 | Loss: 15.2832 | LR: 1.76e-04 | Eps: 0.011
+Episode 22200 | Avg Score:   1932.0 | Avg Max Tile:  158.4 | Loss: 12.9525 | LR: 1.73e-04 | Eps: 0.011
+Episode 22300 | Avg Score:   2041.0 | Avg Max Tile:  161.1 | Loss: 12.4171 | LR: 1.70e-04 | Eps: 0.011
+Episode 22400 | Avg Score:   2091.7 | Avg Max Tile:  180.0 | Loss: 7.6830 | LR: 1.68e-04 | Eps: 0.011
+Episode 22500 | Avg Score:   2417.4 | Avg Max Tile:  195.2 | Loss: 13.7406 | LR: 1.65e-04 | Eps: 0.011
+Episode 22600 | Avg Score:   2042.4 | Avg Max Tile:  166.2 | Loss: 12.5082 | LR: 1.62e-04 | Eps: 0.011
+Episode 22700 | Avg Score:   1832.3 | Avg Max Tile:  153.1 | Loss: 11.1273 | LR: 1.59e-04 | Eps: 0.011
+Episode 22800 | Avg Score:   2214.5 | Avg Max Tile:  180.8 | Loss: 19.0860 | LR: 1.56e-04 | Eps: 0.011
+Episode 22900 | Avg Score:   1799.3 | Avg Max Tile:  153.4 | Loss: 12.5595 | LR: 1.53e-04 | Eps: 0.011
+Checkpoint saved (episode 23000, best avg: 2349.4)
+Episode 23000 | Avg Score:   1425.8 | Avg Max Tile:  123.0 | Loss: 14.1669 | LR: 1.50e-04 | Eps: 0.011
+Episode 23100 | Avg Score:   1607.3 | Avg Max Tile:  137.4 | Loss: 6.9409 | LR: 1.47e-04 | Eps: 0.011
+Episode 23200 | Avg Score:   2000.2 | Avg Max Tile:  168.0 | Loss: 20.1812 | LR: 1.44e-04 | Eps: 0.011
+Episode 23300 | Avg Score:   2044.8 | Avg Max Tile:  167.0 | Loss: 9.9586 | LR: 1.41e-04 | Eps: 0.011
+Episode 23400 | Avg Score:   2398.6 | Avg Max Tile:  191.7 | Loss: 11.0560 | LR: 1.38e-04 | Eps: 0.011
+Episode 23500 | Avg Score:   2093.0 | Avg Max Tile:  168.3 | Loss: 7.6769 | LR: 1.35e-04 | Eps: 0.010
+Episode 23600 | Avg Score:   2386.9 | Avg Max Tile:  192.0 | Loss: 6.6976 | LR: 1.32e-04 | Eps: 0.010
+Episode 23700 | Avg Score:   1986.9 | Avg Max Tile:  164.2 | Loss: 7.3770 | LR: 1.29e-04 | Eps: 0.010
+Episode 23800 | Avg Score:   1508.4 | Avg Max Tile:  131.7 | Loss: 5.5734 | LR: 1.26e-04 | Eps: 0.010
+Episode 23900 | Avg Score:   1942.0 | Avg Max Tile:  154.9 | Loss: 14.2396 | LR: 1.24e-04 | Eps: 0.010
+Checkpoint saved (episode 24000, best avg: 2349.4)
+Episode 24000 | Avg Score:   2066.7 | Avg Max Tile:  169.3 | Loss: 14.3163 | LR: 1.21e-04 | Eps: 0.010
+Episode 24100 | Avg Score:   1904.8 | Avg Max Tile:  160.0 | Loss: 7.2133 | LR: 1.18e-04 | Eps: 0.010
+Episode 24200 | Avg Score:   1602.8 | Avg Max Tile:  136.3 | Loss: 14.0110 | LR: 1.15e-04 | Eps: 0.010
+Episode 24300 | Avg Score:   1902.6 | Avg Max Tile:  160.3 | Loss: 11.3884 | LR: 1.12e-04 | Eps: 0.010
+Episode 24400 | Avg Score:   2058.6 | Avg Max Tile:  172.8 | Loss: 8.8030 | LR: 1.09e-04 | Eps: 0.010
+Episode 24500 | Avg Score:   1578.5 | Avg Max Tile:  139.5 | Loss: 9.5458 | LR: 1.06e-04 | Eps: 0.010
+Episode 24600 | Avg Score:   1912.7 | Avg Max Tile:  156.2 | Loss: 10.9257 | LR: 1.04e-04 | Eps: 0.010
+Episode 24700 | Avg Score:   1847.2 | Avg Max Tile:  163.5 | Loss: 11.5019 | LR: 1.01e-04 | Eps: 0.010
+Episode 24800 | Avg Score:   2025.8 | Avg Max Tile:  167.4 | Loss: 9.3184 | LR: 9.80e-05 | Eps: 0.010
+Episode 24900 | Avg Score:   1747.1 | Avg Max Tile:  148.8 | Loss: 6.4892 | LR: 9.52e-05 | Eps: 0.010
+Checkpoint saved (episode 25000, best avg: 2349.4)
+Episode 25000 | Avg Score:   2046.4 | Avg Max Tile:  174.4 | Loss: 15.8236 | LR: 9.25e-05 | Eps: 0.010
+Episode 25100 | Avg Score:   1571.0 | Avg Max Tile:  137.3 | Loss: 7.7137 | LR: 8.98e-05 | Eps: 0.010
+Episode 25200 | Avg Score:   1698.3 | Avg Max Tile:  144.6 | Loss: 18.3487 | LR: 8.71e-05 | Eps: 0.010
+Episode 25300 | Avg Score:   1956.7 | Avg Max Tile:  166.7 | Loss: 12.2086 | LR: 8.44e-05 | Eps: 0.010
+Episode 25400 | Avg Score:   1740.7 | Avg Max Tile:  145.9 | Loss: 7.0782 | LR: 8.18e-05 | Eps: 0.010
+Episode 25500 | Avg Score:   1635.3 | Avg Max Tile:  138.2 | Loss: 9.9941 | LR: 7.92e-05 | Eps: 0.010
+Episode 25600 | Avg Score:   2146.9 | Avg Max Tile:  178.6 | Loss: 8.3866 | LR: 7.66e-05 | Eps: 0.010
+Episode 25700 | Avg Score:   1776.4 | Avg Max Tile:  153.8 | Loss: 9.4775 | LR: 7.40e-05 | Eps: 0.010
+Episode 25800 | Avg Score:   1772.6 | Avg Max Tile:  153.1 | Loss: 9.9562 | LR: 7.15e-05 | Eps: 0.010
+Episode 25900 | Avg Score:   1465.6 | Avg Max Tile:  132.3 | Loss: 10.3828 | LR: 6.90e-05 | Eps: 0.010
+Checkpoint saved (episode 26000, best avg: 2349.4)
+Episode 26000 | Avg Score:   1669.8 | Avg Max Tile:  148.5 | Loss: 7.4594 | LR: 6.66e-05 | Eps: 0.010
+Episode 26100 | Avg Score:   1413.7 | Avg Max Tile:  125.8 | Loss: 13.4154 | LR: 6.41e-05 | Eps: 0.010
+Episode 26200 | Avg Score:   1515.2 | Avg Max Tile:  131.0 | Loss: 8.9873 | LR: 6.17e-05 | Eps: 0.010
+Episode 26300 | Avg Score:   1423.6 | Avg Max Tile:  127.5 | Loss: 6.7803 | LR: 5.94e-05 | Eps: 0.010
+Episode 26400 | Avg Score:   1788.6 | Avg Max Tile:  154.2 | Loss: 10.5196 | LR: 5.70e-05 | Eps: 0.010
+Episode 26500 | Avg Score:   1996.3 | Avg Max Tile:  159.4 | Loss: 12.2279 | LR: 5.47e-05 | Eps: 0.010
+Episode 26600 | Avg Score:   1928.8 | Avg Max Tile:  163.5 | Loss: 10.4074 | LR: 5.25e-05 | Eps: 0.010
+Episode 26700 | Avg Score:   1964.9 | Avg Max Tile:  165.4 | Loss: 15.5573 | LR: 5.03e-05 | Eps: 0.010
+Episode 26800 | Avg Score:   1971.6 | Avg Max Tile:  166.7 | Loss: 7.4597 | LR: 4.81e-05 | Eps: 0.010
+Episode 26900 | Avg Score:   1268.2 | Avg Max Tile:  109.4 | Loss: 12.4976 | LR: 4.60e-05 | Eps: 0.010
+Checkpoint saved (episode 27000, best avg: 2349.4)
+Episode 27000 | Avg Score:   1923.1 | Avg Max Tile:  160.2 | Loss: 13.8796 | LR: 4.39e-05 | Eps: 0.010
+Episode 27100 | Avg Score:   1485.6 | Avg Max Tile:  132.5 | Loss: 9.3781 | LR: 4.18e-05 | Eps: 0.010
+Episode 27200 | Avg Score:   1129.0 | Avg Max Tile:   97.6 | Loss: 24.7347 | LR: 3.98e-05 | Eps: 0.010
+Episode 27300 | Avg Score:    985.9 | Avg Max Tile:   86.9 | Loss: 11.3751 | LR: 3.78e-05 | Eps: 0.010
+Episode 27400 | Avg Score:   1136.7 | Avg Max Tile:  101.4 | Loss: 10.3690 | LR: 3.59e-05 | Eps: 0.010
+Episode 27500 | Avg Score:   1544.6 | Avg Max Tile:  130.9 | Loss: 11.4474 | LR: 3.40e-05 | Eps: 0.010
+Episode 27600 | Avg Score:   1383.6 | Avg Max Tile:  121.3 | Loss: 16.5874 | LR: 3.21e-05 | Eps: 0.010
+Episode 27700 | Avg Score:   1963.0 | Avg Max Tile:  163.4 | Loss: 10.9707 | LR: 3.03e-05 | Eps: 0.010
+Episode 27800 | Avg Score:   1858.2 | Avg Max Tile:  152.1 | Loss: 11.3311 | LR: 2.86e-05 | Eps: 0.010
+Episode 27900 | Avg Score:   1149.9 | Avg Max Tile:  106.3 | Loss: 19.7013 | LR: 2.69e-05 | Eps: 0.010
+Checkpoint saved (episode 28000, best avg: 2349.4)
+Episode 28000 | Avg Score:   1322.0 | Avg Max Tile:  116.6 | Loss: 8.9409 | LR: 2.52e-05 | Eps: 0.010
+Episode 28100 | Avg Score:    847.0 | Avg Max Tile:   80.5 | Loss: 16.5181 | LR: 2.36e-05 | Eps: 0.010
+Episode 28200 | Avg Score:   1449.5 | Avg Max Tile:  125.8 | Loss: 10.1839 | LR: 2.20e-05 | Eps: 0.010
+Episode 28300 | Avg Score:    787.3 | Avg Max Tile:   71.0 | Loss: 15.6700 | LR: 2.05e-05 | Eps: 0.010
+Episode 28400 | Avg Score:    700.8 | Avg Max Tile:   64.6 | Loss: 14.1278 | LR: 1.91e-05 | Eps: 0.010
+Episode 28500 | Avg Score:   1264.9 | Avg Max Tile:  110.5 | Loss: 19.8841 | LR: 1.77e-05 | Eps: 0.010
+Episode 28600 | Avg Score:   2550.7 | Avg Max Tile:  199.4 | Loss: 24.7014 | LR: 1.63e-05 | Eps: 0.010
+Episode 28700 | Avg Score:   2690.0 | Avg Max Tile:  210.6 | Loss: 68.9757 | LR: 1.50e-05 | Eps: 0.010
+Episode 28800 | Avg Score:   2567.6 | Avg Max Tile:  203.8 | Loss: 74.8603 | LR: 1.37e-05 | Eps: 0.010
+Episode 28900 | Avg Score:   1890.3 | Avg Max Tile:  157.1 | Loss: 17.8926 | LR: 1.25e-05 | Eps: 0.010
+Checkpoint saved (episode 29000, best avg: 2349.4)
+Episode 29000 | Avg Score:   2099.0 | Avg Max Tile:  173.1 | Loss: 10.1250 | LR: 1.14e-05 | Eps: 0.010
+Episode 29100 | Avg Score:   2707.2 | Avg Max Tile:  209.0 | Loss: 9.7335 | LR: 1.03e-05 | Eps: 0.010
+Episode 29200 | Avg Score:   1232.4 | Avg Max Tile:  109.8 | Loss: 21.2659 | LR: 9.23e-06 | Eps: 0.010
+Episode 29300 | Avg Score:   2366.4 | Avg Max Tile:  197.4 | Loss: 45.9801 | LR: 8.24e-06 | Eps: 0.010
+Episode 29400 | Avg Score:   1341.1 | Avg Max Tile:  110.6 | Loss: 12.4533 | LR: 7.31e-06 | Eps: 0.010
+Episode 29500 | Avg Score:   1528.6 | Avg Max Tile:  137.8 | Loss: 11.3711 | LR: 6.42e-06 | Eps: 0.010
+Episode 29600 | Avg Score:   2204.4 | Avg Max Tile:  181.1 | Loss: 32.4369 | LR: 5.60e-06 | Eps: 0.010
+Episode 29700 | Avg Score:   2395.6 | Avg Max Tile:  194.6 | Loss: 12.3246 | LR: 4.83e-06 | Eps: 0.010
+Episode 29800 | Avg Score:   1432.2 | Avg Max Tile:  127.7 | Loss: 33.8039 | LR: 4.12e-06 | Eps: 0.010
+Episode 29900 | Avg Score:    814.2 | Avg Max Tile:   75.2 | Loss: 31.3094 | LR: 3.46e-06 | Eps: 0.010
+Checkpoint saved (episode 30000, best avg: 2349.4)
+Episode 30000 | Avg Score:    803.6 | Avg Max Tile:   73.5 | Loss: 76.7381 | LR: 2.86e-06 | Eps: 0.010
+Episode 30100 | Avg Score:   1358.5 | Avg Max Tile:  122.3 | Loss: 47.1846 | LR: 2.32e-06 | Eps: 0.010
+Episode 30200 | Avg Score:   1554.3 | Avg Max Tile:  134.4 | Loss: 60.9004 | LR: 1.83e-06 | Eps: 0.010
+Episode 30300 | Avg Score:   1204.8 | Avg Max Tile:  107.2 | Loss: 64.8278 | LR: 1.40e-06 | Eps: 0.010
+Episode 30400 | Avg Score:   1600.8 | Avg Max Tile:  137.6 | Loss: 55.1195 | LR: 1.03e-06 | Eps: 0.010
+Episode 30500 | Avg Score:   1364.8 | Avg Max Tile:  123.2 | Loss: 62.3212 | LR: 7.11e-07 | Eps: 0.010
+Episode 30600 | Avg Score:   1530.7 | Avg Max Tile:  137.6 | Loss: 72.1001 | LR: 4.53e-07 | Eps: 0.010
+Episode 30700 | Avg Score:   1506.6 | Avg Max Tile:  132.6 | Loss: 24.9209 | LR: 2.53e-07 | Eps: 0.010
+Episode 30800 | Avg Score:   1539.6 | Avg Max Tile:  135.8 | Loss: 30.5919 | LR: 1.11e-07 | Eps: 0.010
+Episode 30900 | Avg Score:   1624.1 | Avg Max Tile:  140.5 | Loss: 21.8197 | LR: 2.66e-08 | Eps: 0.010
+Checkpoint saved (episode 31000, best avg: 2349.4)
+Episode 31000 | Avg Score:   1563.0 | Avg Max Tile:  143.2 | Loss: 26.8067 | LR: 3.00e-04 | Eps: 0.010
+Episode 31100 | Avg Score:   1734.2 | Avg Max Tile:  148.7 | Loss: 17.9723 | LR: 3.00e-04 | Eps: 0.010
+Episode 31200 | Avg Score:   1627.0 | Avg Max Tile:  133.3 | Loss: 14.7858 | LR: 3.00e-04 | Eps: 0.010
+Episode 31300 | Avg Score:   1979.1 | Avg Max Tile:  166.4 | Loss: 12.8000 | LR: 3.00e-04 | Eps: 0.010
+Episode 31400 | Avg Score:   2067.9 | Avg Max Tile:  170.4 | Loss: 6.9263 | LR: 3.00e-04 | Eps: 0.010
+Episode 31500 | Avg Score:   2013.3 | Avg Max Tile:  170.1 | Loss: 12.8036 | LR: 3.00e-04 | Eps: 0.010
+Episode 31600 | Avg Score:   1835.2 | Avg Max Tile:  151.4 | Loss: 5.4272 | LR: 3.00e-04 | Eps: 0.010
+Episode 31700 | Avg Score:   1833.9 | Avg Max Tile:  151.0 | Loss: 6.6273 | LR: 3.00e-04 | Eps: 0.010
+Episode 31800 | Avg Score:   1957.3 | Avg Max Tile:  162.1 | Loss: 21.2590 | LR: 3.00e-04 | Eps: 0.010
+Episode 31900 | Avg Score:   1623.4 | Avg Max Tile:  133.6 | Loss: 14.2031 | LR: 2.99e-04 | Eps: 0.010
+Checkpoint saved (episode 32000, best avg: 2349.4)
+Episode 32000 | Avg Score:   1552.2 | Avg Max Tile:  129.8 | Loss: 13.2221 | LR: 2.99e-04 | Eps: 0.010
+Episode 32100 | Avg Score:   1629.1 | Avg Max Tile:  136.2 | Loss: 7.7983 | LR: 2.99e-04 | Eps: 0.010
+Episode 32200 | Avg Score:   1389.0 | Avg Max Tile:  123.5 | Loss: 13.3121 | LR: 2.99e-04 | Eps: 0.010
+Episode 32300 | Avg Score:   1976.3 | Avg Max Tile:  165.9 | Loss: 16.7516 | LR: 2.99e-04 | Eps: 0.010
+Episode 32400 | Avg Score:   1574.7 | Avg Max Tile:  136.3 | Loss: 23.3044 | LR: 2.99e-04 | Eps: 0.010
+Episode 32500 | Avg Score:   1887.7 | Avg Max Tile:  161.8 | Loss: 10.6493 | LR: 2.98e-04 | Eps: 0.010
+Episode 32600 | Avg Score:   1832.1 | Avg Max Tile:  161.0 | Loss: 17.1296 | LR: 2.98e-04 | Eps: 0.010
+Episode 32700 | Avg Score:   1920.8 | Avg Max Tile:  159.5 | Loss: 12.5227 | LR: 2.98e-04 | Eps: 0.010
+Episode 32800 | Avg Score:   1761.0 | Avg Max Tile:  154.7 | Loss: 10.3070 | LR: 2.98e-04 | Eps: 0.010
+Episode 32900 | Avg Score:   1680.6 | Avg Max Tile:  147.4 | Loss: 18.6702 | LR: 2.97e-04 | Eps: 0.010
+Checkpoint saved (episode 33000, best avg: 2349.4)
+Episode 33000 | Avg Score:   2068.1 | Avg Max Tile:  169.1 | Loss: 10.7978 | LR: 2.97e-04 | Eps: 0.010
+Episode 33100 | Avg Score:   1598.1 | Avg Max Tile:  136.2 | Loss: 15.4955 | LR: 2.97e-04 | Eps: 0.010
+Episode 33200 | Avg Score:   1669.5 | Avg Max Tile:  139.5 | Loss: 8.6457 | LR: 2.97e-04 | Eps: 0.010
+Episode 33300 | Avg Score:   1529.5 | Avg Max Tile:  133.4 | Loss: 6.2379 | LR: 2.96e-04 | Eps: 0.010
+Episode 33400 | Avg Score:   1485.1 | Avg Max Tile:  133.6 | Loss: 8.2050 | LR: 2.96e-04 | Eps: 0.010
+Episode 33500 | Avg Score:   1406.1 | Avg Max Tile:  117.6 | Loss: 10.7309 | LR: 2.95e-04 | Eps: 0.010
+Episode 33600 | Avg Score:   1340.9 | Avg Max Tile:  118.7 | Loss: 16.9464 | LR: 2.95e-04 | Eps: 0.010
+Episode 33700 | Avg Score:   1353.2 | Avg Max Tile:  117.3 | Loss: 16.7346 | LR: 2.95e-04 | Eps: 0.010
+Episode 33800 | Avg Score:   1367.5 | Avg Max Tile:  113.0 | Loss: 9.6507 | LR: 2.94e-04 | Eps: 0.010
+Episode 33900 | Avg Score:   1381.4 | Avg Max Tile:  118.2 | Loss: 15.2712 | LR: 2.94e-04 | Eps: 0.010
+Checkpoint saved (episode 34000, best avg: 2349.4)
+Episode 34000 | Avg Score:   1747.5 | Avg Max Tile:  145.0 | Loss: 4.2692 | LR: 2.94e-04 | Eps: 0.010
+Episode 34100 | Avg Score:   1896.9 | Avg Max Tile:  158.4 | Loss: 5.5584 | LR: 2.93e-04 | Eps: 0.010
+Episode 34200 | Avg Score:   1691.0 | Avg Max Tile:  141.1 | Loss: 9.7973 | LR: 2.93e-04 | Eps: 0.010
+Episode 34300 | Avg Score:   1537.1 | Avg Max Tile:  138.1 | Loss: 8.8348 | LR: 2.92e-04 | Eps: 0.010
+Episode 34400 | Avg Score:   1522.3 | Avg Max Tile:  127.7 | Loss: 2.1672 | LR: 2.92e-04 | Eps: 0.010
+Episode 34500 | Avg Score:   1571.9 | Avg Max Tile:  134.4 | Loss: 6.1921 | LR: 2.91e-04 | Eps: 0.010
+Episode 34600 | Avg Score:   1677.7 | Avg Max Tile:  143.7 | Loss: 6.7126 | LR: 2.91e-04 | Eps: 0.010
+Episode 34700 | Avg Score:   1741.5 | Avg Max Tile:  146.4 | Loss: 8.4766 | LR: 2.90e-04 | Eps: 0.010
+Episode 34800 | Avg Score:   1590.6 | Avg Max Tile:  143.4 | Loss: 9.5125 | LR: 2.90e-04 | Eps: 0.010
+Episode 34900 | Avg Score:   1201.1 | Avg Max Tile:  107.0 | Loss: 11.0197 | LR: 2.89e-04 | Eps: 0.010
+Checkpoint saved (episode 35000, best avg: 2349.4)
+Episode 35000 | Avg Score:   1783.1 | Avg Max Tile:  145.3 | Loss: 6.7232 | LR: 2.89e-04 | Eps: 0.010
+Episode 35100 | Avg Score:   1600.2 | Avg Max Tile:  133.6 | Loss: 4.4008 | LR: 2.88e-04 | Eps: 0.010
+Episode 35200 | Avg Score:   1256.8 | Avg Max Tile:  113.9 | Loss: 5.4878 | LR: 2.87e-04 | Eps: 0.010
+Episode 35300 | Avg Score:   1474.3 | Avg Max Tile:  119.7 | Loss: 3.7787 | LR: 2.87e-04 | Eps: 0.010
+Episode 35400 | Avg Score:   1735.2 | Avg Max Tile:  143.5 | Loss: 9.6363 | LR: 2.86e-04 | Eps: 0.010
+Episode 35500 | Avg Score:   1759.2 | Avg Max Tile:  146.9 | Loss: 4.5003 | LR: 2.86e-04 | Eps: 0.010
+Episode 35600 | Avg Score:   1468.5 | Avg Max Tile:  121.9 | Loss: 2.1005 | LR: 2.85e-04 | Eps: 0.010
+Episode 35700 | Avg Score:   1670.3 | Avg Max Tile:  142.2 | Loss: 6.0854 | LR: 2.84e-04 | Eps: 0.010
+Episode 35800 | Avg Score:   1391.5 | Avg Max Tile:  121.3 | Loss: 6.0074 | LR: 2.84e-04 | Eps: 0.010
+Episode 35900 | Avg Score:   1609.9 | Avg Max Tile:  138.1 | Loss: 5.4036 | LR: 2.83e-04 | Eps: 0.010
+Checkpoint saved (episode 36000, best avg: 2349.4)
+Episode 36000 | Avg Score:   1235.2 | Avg Max Tile:  109.4 | Loss: 7.9379 | LR: 2.82e-04 | Eps: 0.010
+Episode 36100 | Avg Score:   1600.5 | Avg Max Tile:  138.4 | Loss: 8.3316 | LR: 2.82e-04 | Eps: 0.010
+Episode 36200 | Avg Score:   1597.8 | Avg Max Tile:  138.1 | Loss: 4.2318 | LR: 2.81e-04 | Eps: 0.010
+Episode 36300 | Avg Score:   1917.0 | Avg Max Tile:  165.0 | Loss: 5.9209 | LR: 2.80e-04 | Eps: 0.010
+Episode 36400 | Avg Score:   1480.6 | Avg Max Tile:  123.8 | Loss: 3.3014 | LR: 2.79e-04 | Eps: 0.010
+Episode 36500 | Avg Score:   1708.4 | Avg Max Tile:  146.2 | Loss: 6.7892 | LR: 2.79e-04 | Eps: 0.010
+Episode 36600 | Avg Score:   1597.6 | Avg Max Tile:  129.4 | Loss: 5.4474 | LR: 2.78e-04 | Eps: 0.010
+Episode 36700 | Avg Score:   1204.6 | Avg Max Tile:  105.1 | Loss: 7.9114 | LR: 2.77e-04 | Eps: 0.010
+Episode 36800 | Avg Score:   1191.3 | Avg Max Tile:   98.4 | Loss: 7.7038 | LR: 2.76e-04 | Eps: 0.010
+Episode 36900 | Avg Score:   1132.5 | Avg Max Tile:   98.9 | Loss: 9.5493 | LR: 2.76e-04 | Eps: 0.010
+Checkpoint saved (episode 37000, best avg: 2349.4)
+Episode 37000 | Avg Score:   1520.6 | Avg Max Tile:  131.4 | Loss: 6.0321 | LR: 2.75e-04 | Eps: 0.010
+Episode 37100 | Avg Score:   1795.6 | Avg Max Tile:  152.6 | Loss: 4.0306 | LR: 2.74e-04 | Eps: 0.010
+Episode 37200 | Avg Score:   1131.7 | Avg Max Tile:   99.2 | Loss: 6.3292 | LR: 2.73e-04 | Eps: 0.010
+Episode 37300 | Avg Score:   1644.7 | Avg Max Tile:  139.5 | Loss: 3.6412 | LR: 2.72e-04 | Eps: 0.010
+Episode 37400 | Avg Score:   1241.6 | Avg Max Tile:  112.2 | Loss: 2.6055 | LR: 2.71e-04 | Eps: 0.010
+Episode 37500 | Avg Score:   1062.1 | Avg Max Tile:   94.2 | Loss: 4.3886 | LR: 2.70e-04 | Eps: 0.010
+Episode 37600 | Avg Score:   1181.4 | Avg Max Tile:  106.1 | Loss: 4.1405 | LR: 2.70e-04 | Eps: 0.010
+Episode 37700 | Avg Score:    936.0 | Avg Max Tile:   80.4 | Loss: 8.6315 | LR: 2.69e-04 | Eps: 0.010
+Episode 37800 | Avg Score:   1365.9 | Avg Max Tile:  121.0 | Loss: 7.4019 | LR: 2.68e-04 | Eps: 0.010
+Episode 37900 | Avg Score:   1295.4 | Avg Max Tile:  112.3 | Loss: 2.0416 | LR: 2.67e-04 | Eps: 0.010
+Checkpoint saved (episode 38000, best avg: 2349.4)
+Episode 38000 | Avg Score:   1652.6 | Avg Max Tile:  139.5 | Loss: 4.5414 | LR: 2.66e-04 | Eps: 0.010
+Episode 38100 | Avg Score:   1295.5 | Avg Max Tile:  115.0 | Loss: 2.3326 | LR: 2.65e-04 | Eps: 0.010
+Episode 38200 | Avg Score:   1210.9 | Avg Max Tile:  108.8 | Loss: 3.6506 | LR: 2.64e-04 | Eps: 0.010
+Episode 38300 | Avg Score:   1336.7 | Avg Max Tile:  118.1 | Loss: 2.1090 | LR: 2.63e-04 | Eps: 0.010
+Episode 38400 | Avg Score:   1403.2 | Avg Max Tile:  119.0 | Loss: 3.6676 | LR: 2.62e-04 | Eps: 0.010
+Episode 38500 | Avg Score:   1315.9 | Avg Max Tile:  119.9 | Loss: 3.4973 | LR: 2.61e-04 | Eps: 0.010
+Episode 38600 | Avg Score:   1148.2 | Avg Max Tile:  103.4 | Loss: 3.0332 | LR: 2.60e-04 | Eps: 0.010
+Episode 38700 | Avg Score:   1034.7 | Avg Max Tile:   92.6 | Loss: 2.5023 | LR: 2.59e-04 | Eps: 0.010
+Episode 38800 | Avg Score:   1157.8 | Avg Max Tile:  102.1 | Loss: 3.0791 | LR: 2.58e-04 | Eps: 0.010
+Episode 38900 | Avg Score:   1469.6 | Avg Max Tile:  127.4 | Loss: 6.0108 | LR: 2.57e-04 | Eps: 0.010
+Checkpoint saved (episode 39000, best avg: 2349.4)
+Episode 39000 | Avg Score:   1522.0 | Avg Max Tile:  133.0 | Loss: 4.6133 | LR: 2.56e-04 | Eps: 0.010
+Episode 39100 | Avg Score:   1089.5 | Avg Max Tile:  100.6 | Loss: 3.0483 | LR: 2.55e-04 | Eps: 0.010
+Episode 39200 | Avg Score:   1281.4 | Avg Max Tile:  113.6 | Loss: 2.2969 | LR: 2.54e-04 | Eps: 0.010
+Episode 39300 | Avg Score:   1318.6 | Avg Max Tile:  114.6 | Loss: 2.3063 | LR: 2.53e-04 | Eps: 0.010
+Episode 39400 | Avg Score:   1160.4 | Avg Max Tile:   98.6 | Loss: 3.6502 | LR: 2.52e-04 | Eps: 0.010
+Episode 39500 | Avg Score:    991.1 | Avg Max Tile:   89.9 | Loss: 2.8463 | LR: 2.51e-04 | Eps: 0.010
+Episode 39600 | Avg Score:   1111.3 | Avg Max Tile:   95.4 | Loss: 3.4799 | LR: 2.50e-04 | Eps: 0.010
+Episode 39700 | Avg Score:   1429.4 | Avg Max Tile:  125.6 | Loss: 1.2976 | LR: 2.48e-04 | Eps: 0.010
+Episode 39800 | Avg Score:   1231.1 | Avg Max Tile:  111.4 | Loss: 2.1845 | LR: 2.47e-04 | Eps: 0.010
+Episode 39900 | Avg Score:   1106.3 | Avg Max Tile:  102.6 | Loss: 4.0703 | LR: 2.46e-04 | Eps: 0.010
+Checkpoint saved (episode 40000, best avg: 2349.4)
+Episode 40000 | Avg Score:   1180.9 | Avg Max Tile:  105.8 | Loss: 1.7924 | LR: 2.45e-04 | Eps: 0.010
+Episode 40100 | Avg Score:   1283.9 | Avg Max Tile:  111.5 | Loss: 3.3257 | LR: 2.44e-04 | Eps: 0.010
+Episode 40200 | Avg Score:   1175.1 | Avg Max Tile:  112.5 | Loss: 3.2222 | LR: 2.43e-04 | Eps: 0.010
+Episode 40300 | Avg Score:   1256.4 | Avg Max Tile:  110.4 | Loss: 2.6612 | LR: 2.42e-04 | Eps: 0.010
+Episode 40400 | Avg Score:   1223.8 | Avg Max Tile:  111.2 | Loss: 2.1771 | LR: 2.40e-04 | Eps: 0.010
+Episode 40500 | Avg Score:   1093.0 | Avg Max Tile:  101.6 | Loss: 3.2553 | LR: 2.39e-04 | Eps: 0.010
+Episode 40600 | Avg Score:   1193.0 | Avg Max Tile:  108.2 | Loss: 3.5029 | LR: 2.38e-04 | Eps: 0.010
+Episode 40700 | Avg Score:   1127.1 | Avg Max Tile:   99.8 | Loss: 4.6134 | LR: 2.37e-04 | Eps: 0.010
+Episode 40800 | Avg Score:   1038.7 | Avg Max Tile:   90.8 | Loss: 1.9107 | LR: 2.36e-04 | Eps: 0.010
+Episode 40900 | Avg Score:   1014.2 | Avg Max Tile:   91.0 | Loss: 5.5642 | LR: 2.35e-04 | Eps: 0.010
+Checkpoint saved (episode 41000, best avg: 2349.4)
+Episode 41000 | Avg Score:    946.1 | Avg Max Tile:   84.5 | Loss: 5.6453 | LR: 2.33e-04 | Eps: 0.010
+Episode 41100 | Avg Score:   1198.4 | Avg Max Tile:  108.2 | Loss: 6.4424 | LR: 2.32e-04 | Eps: 0.010
+Episode 41200 | Avg Score:   1146.6 | Avg Max Tile:  102.1 | Loss: 9.5850 | LR: 2.31e-04 | Eps: 0.010
+Episode 41300 | Avg Score:   1080.2 | Avg Max Tile:   94.9 | Loss: 5.0799 | LR: 2.30e-04 | Eps: 0.010
+Episode 41400 | Avg Score:   1034.4 | Avg Max Tile:   89.0 | Loss: 6.0426 | LR: 2.28e-04 | Eps: 0.010
+Episode 41500 | Avg Score:   1099.6 | Avg Max Tile:   97.0 | Loss: 5.8242 | LR: 2.27e-04 | Eps: 0.010
+Episode 41600 | Avg Score:    966.2 | Avg Max Tile:   84.5 | Loss: 6.9244 | LR: 2.26e-04 | Eps: 0.010
+Episode 41700 | Avg Score:    795.2 | Avg Max Tile:   76.6 | Loss: 5.3138 | LR: 2.25e-04 | Eps: 0.010
+Episode 41800 | Avg Score:   1099.0 | Avg Max Tile:   92.9 | Loss: 9.7442 | LR: 2.23e-04 | Eps: 0.010
+Episode 41900 | Avg Score:    969.5 | Avg Max Tile:   81.8 | Loss: 12.1674 | LR: 2.22e-04 | Eps: 0.010
+Checkpoint saved (episode 42000, best avg: 2349.4)
+Episode 42000 | Avg Score:    782.8 | Avg Max Tile:   69.1 | Loss: 12.3394 | LR: 2.21e-04 | Eps: 0.010
+Episode 42100 | Avg Score:    830.8 | Avg Max Tile:   72.5 | Loss: 15.7177 | LR: 2.19e-04 | Eps: 0.010
+Episode 42200 | Avg Score:    716.0 | Avg Max Tile:   66.2 | Loss: 17.2563 | LR: 2.18e-04 | Eps: 0.010
+Episode 42300 | Avg Score:    821.1 | Avg Max Tile:   72.0 | Loss: 16.4379 | LR: 2.17e-04 | Eps: 0.010
+Episode 42400 | Avg Score:    784.6 | Avg Max Tile:   72.9 | Loss: 17.5548 | LR: 2.15e-04 | Eps: 0.010
+Episode 42500 | Avg Score:    709.3 | Avg Max Tile:   62.6 | Loss: 19.2776 | LR: 2.14e-04 | Eps: 0.010
+Episode 42600 | Avg Score:    743.5 | Avg Max Tile:   69.9 | Loss: 14.3644 | LR: 2.13e-04 | Eps: 0.010
+Episode 42700 | Avg Score:    801.7 | Avg Max Tile:   75.1 | Loss: 14.4752 | LR: 2.11e-04 | Eps: 0.010
+Episode 42800 | Avg Score:    830.6 | Avg Max Tile:   76.8 | Loss: 16.9062 | LR: 2.10e-04 | Eps: 0.010
+Episode 42900 | Avg Score:    879.9 | Avg Max Tile:   81.0 | Loss: 16.8814 | LR: 2.09e-04 | Eps: 0.010
+Checkpoint saved (episode 43000, best avg: 2349.4)
+Episode 43000 | Avg Score:    728.4 | Avg Max Tile:   68.8 | Loss: 18.5006 | LR: 2.07e-04 | Eps: 0.010
+Episode 43100 | Avg Score:    961.3 | Avg Max Tile:   87.8 | Loss: 17.7861 | LR: 2.06e-04 | Eps: 0.010
+Episode 43200 | Avg Score:    795.8 | Avg Max Tile:   71.3 | Loss: 25.3573 | LR: 2.05e-04 | Eps: 0.010
+Episode 43300 | Avg Score:    697.3 | Avg Max Tile:   65.2 | Loss: 33.8521 | LR: 2.03e-04 | Eps: 0.010
+Episode 43400 | Avg Score:    740.6 | Avg Max Tile:   68.5 | Loss: 38.7918 | LR: 2.02e-04 | Eps: 0.010
+Episode 43500 | Avg Score:    745.1 | Avg Max Tile:   69.3 | Loss: 27.8265 | LR: 2.00e-04 | Eps: 0.010
+Episode 43600 | Avg Score:   1245.4 | Avg Max Tile:  107.2 | Loss: 24.7642 | LR: 1.99e-04 | Eps: 0.010
+Episode 43700 | Avg Score:   1130.0 | Avg Max Tile:   97.0 | Loss: 28.0168 | LR: 1.98e-04 | Eps: 0.010
+Episode 43800 | Avg Score:    780.1 | Avg Max Tile:   71.4 | Loss: 27.4321 | LR: 1.96e-04 | Eps: 0.010
+Episode 43900 | Avg Score:    773.0 | Avg Max Tile:   71.4 | Loss: 29.5137 | LR: 1.95e-04 | Eps: 0.010
+Checkpoint saved (episode 44000, best avg: 2349.4)
+Episode 44000 | Avg Score:    773.4 | Avg Max Tile:   73.1 | Loss: 42.3038 | LR: 1.93e-04 | Eps: 0.010
+Episode 44100 | Avg Score:    819.6 | Avg Max Tile:   72.7 | Loss: 27.5038 | LR: 1.92e-04 | Eps: 0.010
+Episode 44200 | Avg Score:    859.1 | Avg Max Tile:   80.0 | Loss: 27.5438 | LR: 1.91e-04 | Eps: 0.010
+Episode 44300 | Avg Score:    822.6 | Avg Max Tile:   75.8 | Loss: 53.9763 | LR: 1.89e-04 | Eps: 0.010
+Episode 44400 | Avg Score:    852.5 | Avg Max Tile:   80.2 | Loss: 55.0679 | LR: 1.88e-04 | Eps: 0.010
+Episode 44500 | Avg Score:    782.8 | Avg Max Tile:   72.0 | Loss: 98.4676 | LR: 1.86e-04 | Eps: 0.010
+Episode 44600 | Avg Score:    812.2 | Avg Max Tile:   77.9 | Loss: 100.4241 | LR: 1.85e-04 | Eps: 0.010
+Episode 44700 | Avg Score:    834.6 | Avg Max Tile:   83.0 | Loss: 143.6610 | LR: 1.84e-04 | Eps: 0.010
+Episode 44800 | Avg Score:    737.0 | Avg Max Tile:   71.1 | Loss: 137.6606 | LR: 1.82e-04 | Eps: 0.010
+Episode 44900 | Avg Score:    736.8 | Avg Max Tile:   70.2 | Loss: 255.9379 | LR: 1.81e-04 | Eps: 0.010
+Checkpoint saved (episode 45000, best avg: 2349.4)
+Episode 45000 | Avg Score:    809.5 | Avg Max Tile:   74.4 | Loss: 419.4212 | LR: 1.79e-04 | Eps: 0.010
+Episode 45100 | Avg Score:    788.1 | Avg Max Tile:   72.3 | Loss: 353.2973 | LR: 1.78e-04 | Eps: 0.010
+Episode 45200 | Avg Score:    754.5 | Avg Max Tile:   69.1 | Loss: 552.0870 | LR: 1.76e-04 | Eps: 0.010
+Episode 45300 | Avg Score:    768.3 | Avg Max Tile:   68.0 | Loss: 861.3949 | LR: 1.75e-04 | Eps: 0.010
+Episode 45400 | Avg Score:    794.5 | Avg Max Tile:   72.2 | Loss: 455.7804 | LR: 1.73e-04 | Eps: 0.010
+Episode 45500 | Avg Score:    833.5 | Avg Max Tile:   72.6 | Loss: 1497.0432 | LR: 1.72e-04 | Eps: 0.010
+Episode 45600 | Avg Score:    835.0 | Avg Max Tile:   74.1 | Loss: 611.7375 | LR: 1.70e-04 | Eps: 0.010
+Episode 45700 | Avg Score:    823.1 | Avg Max Tile:   75.0 | Loss: 1181.1797 | LR: 1.69e-04 | Eps: 0.010
+Episode 45800 | Avg Score:    842.6 | Avg Max Tile:   79.5 | Loss: 3324.3970 | LR: 1.68e-04 | Eps: 0.010
+Episode 45900 | Avg Score:    843.0 | Avg Max Tile:   76.3 | Loss: 2996.9307 | LR: 1.66e-04 | Eps: 0.010
+Checkpoint saved (episode 46000, best avg: 2349.4)
+Episode 46000 | Avg Score:    770.8 | Avg Max Tile:   68.2 | Loss: 3394.6230 | LR: 1.65e-04 | Eps: 0.010
+Episode 46100 | Avg Score:   1540.0 | Avg Max Tile:  130.6 | Loss: 729.3762 | LR: 1.63e-04 | Eps: 0.010
+Episode 46200 | Avg Score:   2495.6 | Avg Max Tile:  196.2 | Loss: 408.3012 | LR: 1.62e-04 | Eps: 0.010
+Episode 46300 | Avg Score:   2534.8 | Avg Max Tile:  196.8 | Loss: 1170.4469 | LR: 1.60e-04 | Eps: 0.010
+Episode 46400 | Avg Score:   2458.4 | Avg Max Tile:  191.7 | Loss: 1196.5006 | LR: 1.59e-04 | Eps: 0.010
+Episode 46500 | Avg Score:   2367.6 | Avg Max Tile:  185.6 | Loss: 1509.7012 | LR: 1.57e-04 | Eps: 0.010
+Episode 46600 | Avg Score:   2560.0 | Avg Max Tile:  199.7 | Loss: 1144.4790 | LR: 1.56e-04 | Eps: 0.010
+Episode 46700 | Avg Score:   2590.0 | Avg Max Tile:  208.3 | Loss: 1361.1340 | LR: 1.54e-04 | Eps: 0.010
+Episode 46800 | Avg Score:   2568.8 | Avg Max Tile:  204.8 | Loss: 4875.2119 | LR: 1.53e-04 | Eps: 0.010
+Episode 46900 | Avg Score:   2445.2 | Avg Max Tile:  191.0 | Loss: 1503.2947 | LR: 1.51e-04 | Eps: 0.010
+Checkpoint saved (episode 47000, best avg: 2349.4)
+Episode 47000 | Avg Score:   2340.1 | Avg Max Tile:  180.5 | Loss: 3203.8660 | LR: 1.50e-04 | Eps: 0.010
+Episode 47100 | Avg Score:   2547.7 | Avg Max Tile:  205.8 | Loss: 1466.9609 | LR: 1.48e-04 | Eps: 0.010
+Episode 47200 | Avg Score:   2460.1 | Avg Max Tile:  189.1 | Loss: 1434.2151 | LR: 1.47e-04 | Eps: 0.010
+Episode 47300 | Avg Score:   2519.2 | Avg Max Tile:  194.2 | Loss: 5511.9722 | LR: 1.46e-04 | Eps: 0.010
+Episode 47400 | Avg Score:   2537.1 | Avg Max Tile:  199.7 | Loss: 5986.8394 | LR: 1.44e-04 | Eps: 0.010
+Episode 47500 | Avg Score:   2601.5 | Avg Max Tile:  211.2 | Loss: 5132.4556 | LR: 1.43e-04 | Eps: 0.010
+Episode 47600 | Avg Score:   2458.3 | Avg Max Tile:  194.2 | Loss: 5801.3589 | LR: 1.41e-04 | Eps: 0.010
+Episode 47700 | Avg Score:   2341.5 | Avg Max Tile:  185.0 | Loss: 4121.1904 | LR: 1.40e-04 | Eps: 0.010
+Episode 47800 | Avg Score:   2498.6 | Avg Max Tile:  190.1 | Loss: 11598.8223 | LR: 1.38e-04 | Eps: 0.010
+Episode 47900 | Avg Score:   2590.8 | Avg Max Tile:  205.4 | Loss: 4166.8789 | LR: 1.37e-04 | Eps: 0.010
+Checkpoint saved (episode 48000, best avg: 2484.5)
+Episode 48000 | Avg Score:   2484.5 | Avg Max Tile:  199.0 | Loss: 9690.8037 | LR: 1.35e-04 | Eps: 0.010
+Episode 48100 | Avg Score:   2467.5 | Avg Max Tile:  196.2 | Loss: 7783.0952 | LR: 1.34e-04 | Eps: 0.010
+Episode 48200 | Avg Score:   2604.7 | Avg Max Tile:  209.9 | Loss: 5174.9238 | LR: 1.32e-04 | Eps: 0.010
+Episode 48300 | Avg Score:   2629.6 | Avg Max Tile:  206.7 | Loss: 4572.1450 | LR: 1.31e-04 | Eps: 0.010
+Episode 48400 | Avg Score:   2516.2 | Avg Max Tile:  202.6 | Loss: 9890.0137 | LR: 1.29e-04 | Eps: 0.010
+Episode 48500 | Avg Score:   2499.4 | Avg Max Tile:  195.5 | Loss: 10823.8633 | LR: 1.28e-04 | Eps: 0.010
+Episode 48600 | Avg Score:   2372.2 | Avg Max Tile:  187.5 | Loss: 9188.0645 | LR: 1.26e-04 | Eps: 0.010
+Episode 48700 | Avg Score:   2609.8 | Avg Max Tile:  206.1 | Loss: 8047.3071 | LR: 1.25e-04 | Eps: 0.010
+Episode 48800 | Avg Score:   2449.8 | Avg Max Tile:  186.4 | Loss: 5604.4346 | LR: 1.24e-04 | Eps: 0.010
+Episode 48900 | Avg Score:   2562.8 | Avg Max Tile:  201.6 | Loss: 8809.7578 | LR: 1.22e-04 | Eps: 0.010
+Checkpoint saved (episode 49000, best avg: 2484.5)
+Episode 49000 | Avg Score:   2263.8 | Avg Max Tile:  178.6 | Loss: 9074.6172 | LR: 1.21e-04 | Eps: 0.010
+Episode 49100 | Avg Score:   2462.0 | Avg Max Tile:  191.7 | Loss: 15793.9746 | LR: 1.19e-04 | Eps: 0.010
+Episode 49200 | Avg Score:   2343.1 | Avg Max Tile:  185.6 | Loss: 23760.5117 | LR: 1.18e-04 | Eps: 0.010
+Episode 49300 | Avg Score:   2369.9 | Avg Max Tile:  181.8 | Loss: 15008.5400 | LR: 1.16e-04 | Eps: 0.010
+Episode 49400 | Avg Score:   2346.2 | Avg Max Tile:  187.0 | Loss: 16395.4062 | LR: 1.15e-04 | Eps: 0.010
+Episode 49500 | Avg Score:   2613.4 | Avg Max Tile:  198.4 | Loss: 7074.7119 | LR: 1.13e-04 | Eps: 0.010
+Episode 49600 | Avg Score:   2323.2 | Avg Max Tile:  181.4 | Loss: 7022.7759 | LR: 1.12e-04 | Eps: 0.010
+Episode 49700 | Avg Score:   2340.8 | Avg Max Tile:  183.7 | Loss: 8157.5308 | LR: 1.11e-04 | Eps: 0.010
+Episode 49800 | Avg Score:   2530.3 | Avg Max Tile:  201.3 | Loss: 5799.3364 | LR: 1.09e-04 | Eps: 0.010
+Episode 49900 | Avg Score:   2586.9 | Avg Max Tile:  206.1 | Loss: 7098.7104 | LR: 1.08e-04 | Eps: 0.010
+Training complete. Model saved to checkpoints/model.pth

@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nnaakkaaii/alpha2048/internal/domain"
+	"github.com/nnaakkaaii/alpha2048/go/internal/domain"
 )
 
 func main() {

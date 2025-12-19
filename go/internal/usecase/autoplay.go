@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/nnaakkaaii/alpha2048/internal/domain"
+	"github.com/nnaakkaaii/alpha2048/go/internal/domain"
 )
 
 // AutoPlayConfig は自動プレイの設定
