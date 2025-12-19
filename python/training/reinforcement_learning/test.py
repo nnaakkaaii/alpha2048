@@ -7,7 +7,7 @@ import time
 import torch
 
 from pkg.fields import Action, Game
-from pkg.networks import MLP
+from pkg.networks import ConvDQN
 from pkg.policies import Greedy
 from pkg.utils import encode_board
 
@@ -21,10 +21,10 @@ def test(
 ) -> dict:
     """Test the trained agent."""
     # Load model
-    policy_net = MLP().to(device)
+    policy_net = ConvDQN().to(device)
 
     if os.path.exists(model_path):
-        state_dict = torch.load(model_path, map_location=device)
+        state_dict = torch.load(model_path, map_location=device, weights_only=False)
         policy_net.load_state_dict(state_dict)
         if verbose:
             print(f"Loaded model from {model_path}")

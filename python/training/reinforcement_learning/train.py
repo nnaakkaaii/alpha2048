@@ -10,15 +10,15 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 from pkg.fields import Action, Game
-from pkg.networks import MLP
+from pkg.networks import ConvDQN
 from pkg.policies import EpsilonGreedy
 from pkg.utils import ReplayMemory, Transition, encode_board
 
 # Hyperparameters
 GAMMA = 0.99
-BATCH_SIZE = 128
+BATCH_SIZE = 512
 TARGET_UPDATE = 100
-MEMORY_SIZE = 100000  # Larger memory for long training
+MEMORY_SIZE = 1000000  # Larger memory for long training
 LR = 3e-4  # Slightly higher initial LR for AdamW
 WEIGHT_DECAY = 1e-5  # L2 regularization
 T_0 = 1000  # Cosine annealing: restart every T_0 episodes
@@ -27,8 +27,8 @@ T_MULT = 2  # Each restart doubles the period
 
 def optimize_model(
     memory: ReplayMemory,
-    policy_net: MLP,
-    target_net: MLP,
+    policy_net: ConvDQN,
+    target_net: ConvDQN,
     optimizer: optim.Optimizer,
     device: torch.device,
 ) -> float | None:
@@ -103,8 +103,8 @@ def train(
     os.makedirs(save_dir, exist_ok=True)
 
     # Initialize networks
-    policy_net = MLP().to(device)
-    target_net = MLP().to(device)
+    policy_net = ConvDQN().to(device)
+    target_net = ConvDQN().to(device)
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
 
@@ -115,8 +115,8 @@ def train(
     scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=T_0, T_mult=T_MULT)
 
     # Epsilon-greedy with slower decay for long training
-    # eps_decay=10000 means ~37% of initial exploration at 10000 steps
-    policy = EpsilonGreedy(policy_net, eps_start=1.0, eps_end=0.01, eps_decay=50000)
+    # eps_decay=500000 means ~37% of initial exploration at 500000 steps
+    policy = EpsilonGreedy(policy_net, eps_start=1.0, eps_end=0.01, eps_decay=500000)
 
     memory = ReplayMemory(MEMORY_SIZE)
 
@@ -132,7 +132,7 @@ def train(
     checkpoint_path = os.path.join(save_dir, "checkpoint.pth")
 
     if os.path.exists(checkpoint_path):
-        checkpoint = torch.load(checkpoint_path, map_location=device)
+        checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
         policy_net.load_state_dict(checkpoint["model_state"])
         target_net.load_state_dict(checkpoint["model_state"])
         optimizer.load_state_dict(checkpoint["optimizer_state"])
@@ -143,7 +143,7 @@ def train(
         if verbose:
             print(f"Resumed from episode {start_episode}, steps {steps_done}")
     elif os.path.exists(model_path):
-        state_dict = torch.load(model_path, map_location=device)
+        state_dict = torch.load(model_path, map_location=device, weights_only=False)
         policy_net.load_state_dict(state_dict)
         target_net.load_state_dict(state_dict)
         if verbose:
