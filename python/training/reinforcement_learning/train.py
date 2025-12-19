@@ -31,12 +31,14 @@ def optimize_model(
     target_net: ConvDQN,
     optimizer: optim.Optimizer,
     device: torch.device,
+    batch_size: int = BATCH_SIZE,
+    gamma: float = GAMMA,
 ) -> float | None:
     """Perform one optimization step."""
-    if len(memory) < BATCH_SIZE:
+    if len(memory) < batch_size:
         return None
 
-    transitions = memory.sample(BATCH_SIZE)
+    transitions = memory.sample(batch_size)
     batch = Transition(*zip(*transitions))
 
     # Compute mask for non-final states
@@ -53,7 +55,7 @@ def optimize_model(
     state_action_values = policy_net(state_batch).gather(1, action_batch)
 
     # Compute V(s_{t+1}) for non-final states
-    next_state_values = torch.zeros(BATCH_SIZE, device=device)
+    next_state_values = torch.zeros(batch_size, device=device)
 
     if non_final_mask.sum() > 0:
         # Double DQN: use policy_net to select action, target_net to evaluate
@@ -78,7 +80,7 @@ def optimize_model(
             next_state_values[non_final_mask] = torch.stack(double_q_values)
 
     # Compute expected Q values
-    expected_state_action_values = reward_batch + (GAMMA * next_state_values)
+    expected_state_action_values = reward_batch + (gamma * next_state_values)
 
     # Huber loss
     loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
@@ -98,8 +100,39 @@ def train(
     device: torch.device,
     verbose: bool = True,
     save_interval: int = 1000,
+    # Hyperparameters with defaults
+    batch_size: int = BATCH_SIZE,
+    gamma: float = GAMMA,
+    lr: float = LR,
+    weight_decay: float = WEIGHT_DECAY,
+    target_update: int = TARGET_UPDATE,
+    memory_size: int = MEMORY_SIZE,
+    t_0: int = T_0,
+    t_mult: int = T_MULT,
+    eps_start: float = 1.0,
+    eps_end: float = 0.01,
+    eps_decay: int = 500000,
 ) -> None:
-    """Train the DQN agent."""
+    """Train the DQN agent with customizable hyperparameters.
+    
+    Args:
+        num_episodes: Number of training episodes
+        save_dir: Directory to save models
+        device: Device to train on (cuda/cpu)
+        verbose: Whether to print progress
+        save_interval: Save model every N episodes
+        batch_size: Batch size for training
+        gamma: Discount factor
+        lr: Learning rate
+        weight_decay: L2 regularization weight
+        target_update: Target network update frequency
+        memory_size: Replay buffer size
+        t_0: Period for cosine annealing
+        t_mult: Period multiplier for cosine annealing
+        eps_start: Initial exploration rate
+        eps_end: Final exploration rate
+        eps_decay: Exploration decay rate
+    """
     os.makedirs(save_dir, exist_ok=True)
 
     # Initialize networks
@@ -109,16 +142,15 @@ def train(
     target_net.eval()
 
     # AdamW optimizer with weight decay
-    optimizer = optim.AdamW(policy_net.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
+    optimizer = optim.AdamW(policy_net.parameters(), lr=lr, weight_decay=weight_decay)
 
     # Cosine annealing with warm restarts - escapes local optima
-    scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=T_0, T_mult=T_MULT)
+    scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=t_0, T_mult=t_mult)
 
-    # Epsilon-greedy with slower decay for long training
-    # eps_decay=500000 means ~37% of initial exploration at 500000 steps
-    policy = EpsilonGreedy(policy_net, eps_start=1.0, eps_end=0.01, eps_decay=500000)
+    # Epsilon-greedy with customizable decay
+    policy = EpsilonGreedy(policy_net, eps_start=eps_start, eps_end=eps_end, eps_decay=eps_decay)
 
-    memory = ReplayMemory(MEMORY_SIZE)
+    memory = ReplayMemory(memory_size)
 
     # Statistics
     recent_scores = deque(maxlen=100)
@@ -203,13 +235,13 @@ def train(
         recent_max_tiles.append(game.get_max_tile())
 
         # Optimize model
-        loss = optimize_model(memory, policy_net, target_net, optimizer, device)
+        loss = optimize_model(memory, policy_net, target_net, optimizer, device, batch_size, gamma)
 
         # Step scheduler (per episode)
         scheduler.step()
 
         # Update target network
-        if episode % TARGET_UPDATE == 0:
+        if episode % target_update == 0:
             target_net.load_state_dict(policy_net.state_dict())
 
         # Calculate current stats
