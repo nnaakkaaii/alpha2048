@@ -238,3 +238,91 @@ class Game:
         new_game.score = self.score
         new_game._game_over = self._game_over
         return new_game
+
+    def get_afterstate(self, action: Action) -> tuple[Optional[np.ndarray], int, bool]:
+        """Get afterstate (state after action, before random tile spawn).
+
+        This is essential for TD learning in 2048, as we learn the value
+        of afterstates rather than states with random tiles.
+
+        Args:
+            action: The action to simulate
+
+        Returns:
+            tuple of (afterstate_board, reward, moved)
+            - afterstate_board: Board after action (None if move invalid)
+            - reward: Score gained from the action
+            - moved: Whether the action changed the board
+        """
+        # Save original state
+        original_board = self.board.copy()
+        original_score = self.score
+
+        # Execute the move without spawning new tile
+        if action == Action.UP:
+            moved, reward = self._move_up()
+        elif action == Action.DOWN:
+            moved, reward = self._move_down()
+        elif action == Action.LEFT:
+            moved, reward = self._move_left()
+        elif action == Action.RIGHT:
+            moved, reward = self._move_right()
+        else:
+            self.board = original_board
+            self.score = original_score
+            return None, 0, False
+
+        if not moved:
+            self.board = original_board
+            self.score = original_score
+            return None, 0, False
+
+        # Get afterstate
+        afterstate = self.board.copy()
+
+        # Restore original state
+        self.board = original_board
+        self.score = original_score
+
+        return afterstate, reward, True
+
+    def step_without_spawn(self, action: Action) -> tuple[int, bool]:
+        """Execute action without spawning new tile.
+
+        Used for TD learning to separate action from randomness.
+
+        Args:
+            action: The action to execute
+
+        Returns:
+            tuple of (score_gained, moved)
+        """
+        if self._game_over:
+            return 0, False
+
+        if action == Action.UP:
+            moved, score = self._move_up()
+        elif action == Action.DOWN:
+            moved, score = self._move_down()
+        elif action == Action.LEFT:
+            moved, score = self._move_left()
+        elif action == Action.RIGHT:
+            moved, score = self._move_right()
+        else:
+            raise ValueError(f"Invalid action: {action}")
+
+        if moved:
+            self.score += score
+
+        return score, moved
+
+    def spawn_tile(self) -> bool:
+        """Spawn a new random tile.
+
+        Returns:
+            True if tile was spawned, False if board is full
+        """
+        spawned = self._spawn_tile()
+        if not spawned or self._check_game_over():
+            self._game_over = True
+        return spawned
